@@ -1,6 +1,5 @@
-// Original page hid the address behind Cloudflare email-protection. Decoded, it
-// is hello@plansio.studio — surfaced here as a real mailto: (better UX + no
-// client-side decode script needed).
+import ContactForm from "./ContactForm";
+
 const EMAIL = "hello@plansio.studio";
 
 export default function CTA() {
@@ -13,20 +12,18 @@ export default function CTA() {
         <img className="mk rv" src="/assets/plansio-logo.png" alt="Plansio mark" />
         {/* eslint-enable @next/next/no-img-element */}
         <h2 className="rv d1">
-          let&apos;s build something
+          let&apos;s build the thing
           <br />
-          <span className="serif grad-t">human.</span>
+          <span className="serif grad-t">you keep describing.</span>
         </h2>
         <p className="sub rv d2">
           Tell us what you&apos;re making. We&apos;ll bring the strategy, the craft, and the code.
         </p>
         <div className="acts rv d3">
-          <a className="btn solid" href={`mailto:${EMAIL}`}>
-            <span>{EMAIL}</span> <span className="ar">↗</span>
-          </a>
-          <a className="btn ghost" href="#top">
-            <span>Back to top</span>
-          </a>
+          <ContactForm />
+          <p className="cta-alt">
+            Prefer email? <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          </p>
         </div>
       </div>
     </section>

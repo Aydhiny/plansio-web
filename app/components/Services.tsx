@@ -32,6 +32,17 @@ const SERVICES = [
     tags: ["Web apps", "Websites", "APIs", "Product UX"],
     delay: "d2",
   },
+  {
+    no: "04",
+    title: (
+      <>
+        games worth <span className="serif">playing</span>
+      </>
+    ),
+    line: "Original games and interactive worlds — from mechanics and art to release. We ship our own titles, and we can ship yours.",
+    tags: ["Game design", "Unity", "Web games", "Narrative"],
+    delay: "d1",
+  },
 ];
 
 export default function Services() {

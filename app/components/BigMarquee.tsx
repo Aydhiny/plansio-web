@@ -4,7 +4,8 @@ function Item() {
       marketing <span className="o">design</span>{" "}
       <span className="serif grad-t" style={{ WebkitTextStroke: "0" }}>
         software
-      </span>
+      </span>{" "}
+      <span className="o">games</span>
       <span className="sep">·</span>
     </span>
   );

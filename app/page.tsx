@@ -2,6 +2,7 @@ import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import BigMarquee from "./components/BigMarquee";
 import Services from "./components/Services";
+import Showcase from "./components/Showcase";
 import Manifesto from "./components/Manifesto";
 import Pricing from "./components/Pricing";
 import CTA from "./components/CTA";
@@ -14,6 +15,7 @@ export default function Home() {
       <Hero />
       <BigMarquee />
       <Services />
+      <Showcase />
       <Manifesto />
       <Pricing />
       <CTA />

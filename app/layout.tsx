@@ -38,10 +38,43 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://plansio.studio";
+const DESCRIPTION =
+  "A full-stack studio — marketing, design, software and games, handled by one team from the first idea to launch day.";
+
 export const metadata: Metadata = {
-  title: "Plansio — Marketing · Design · Software",
-  description:
-    "A full-stack studio for marketing, design & software — building brands, products and the feeling in between.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Plansio — Marketing · Design · Software · Games",
+    template: "%s — Plansio",
+  },
+  description: DESCRIPTION,
+  applicationName: "Plansio",
+  keywords: [
+    "Plansio",
+    "creative studio",
+    "marketing agency",
+    "brand design",
+    "product design",
+    "web development",
+    "game development",
+    "full-stack studio",
+  ],
+  authors: [{ name: "Plansio" }],
+  creator: "Plansio",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: "Plansio",
+    url: "/",
+    title: "Plansio — Marketing · Design · Software · Games",
+    description: DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Plansio — Marketing · Design · Software · Games",
+    description: DESCRIPTION,
+  },
 };
 
 export const viewport: Viewport = {
@@ -59,6 +92,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`js ${display.variable} ${body.variable} ${serif.variable} ${mono.variable}`}
     >
       <body>
+        <a href="#top" className="skip-link">Skip to content</a>
+
         {/* fixed atmosphere layers — purely decorative, server-rendered */}
         <div className="atmos" />
         <canvas id="vapor" />

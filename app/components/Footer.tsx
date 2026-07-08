@@ -28,6 +28,7 @@ export default function Footer() {
             <a href="#work">Marketing</a>
             <a href="#work">Graphic design</a>
             <a href="#work">Software</a>
+            <a href="#work">Games</a>
           </div>
           <div className="fcol">
             <h4>Connect</h4>

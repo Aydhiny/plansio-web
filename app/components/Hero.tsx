@@ -29,12 +29,23 @@ export default function Hero() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className="ref" src="/assets/plansio-logo.png" alt="" />
         </div>
-        <h1 className="giant anim a2">
-          the <span className="serif grad-t sheen">human</span> touch.
+        <h1 className="giant split">
+          {["We", "build", "brands,", "products", "&"].map((word, i) => (
+            <span className="w" key={i}>
+              <span className="wi" style={{ transitionDelay: `${0.3 + i * 0.06}s` }}>
+                {word}
+              </span>
+            </span>
+          ))}
+          <span className="w">
+            <span className="wi serif grad-t sheen" style={{ transitionDelay: "0.6s" }}>
+              worlds.
+            </span>
+          </span>
         </h1>
         <p className="hero-sub anim a3">
-          A full-stack studio for <em className="serif">marketing</em>, <em className="serif">design</em> &amp;
-          software — building brands, products and the feeling in between.
+          A full-stack studio — marketing, design, software and games, handled by one team from the first idea to
+          launch day.
         </p>
         <div className="hero-cta anim a4">
           <a className="btn solid" href="#contact">

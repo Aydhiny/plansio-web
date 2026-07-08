@@ -264,9 +264,17 @@ export default function PrismaticBurst({
     const container = containerRef.current;
     if (!container) return;
 
-    // PERF: cap DPR at 1 — a 44-step raymarch at 2× on a 4K panel is what melts GPUs.
-    const dpr = Math.min(window.devicePixelRatio || 1, 1);
-    const renderer = new Renderer({ dpr, alpha: false, antialias: false });
+    // Amazing perf everywhere: only capable desktops run the animated 44-step
+    // raymarch. Mobile / coarse-pointer / low-core / reduced-motion get ONE
+    // crisp static frame — same look, zero ongoing GPU cost.
+    const lowPower =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      window.matchMedia("(max-width: 820px)").matches ||
+      window.matchMedia("(pointer: coarse)").matches ||
+      (navigator.hardwareConcurrency || 8) <= 4;
+    // hard cap the render surface (long side); soft output → upscale is invisible
+    const maxdim = lowPower ? 560 : 820;
+    const renderer = new Renderer({ dpr: 1, alpha: false, antialias: false });
     rendererRef.current = renderer;
 
     const gl = renderer.gl;
@@ -310,11 +318,19 @@ export default function PrismaticBurst({
     triRef.current = triangle;
     meshRef.current = mesh;
 
+    const renderStatic = () => {
+      program.uniforms.uMouse.value = [0.5, 0.5];
+      program.uniforms.uTime.value = 6;
+      if (meshRef.current) renderer.render({ scene: meshRef.current });
+    };
+
     const resize = () => {
       const w = container.clientWidth || 1;
       const h = container.clientHeight || 1;
+      renderer.dpr = Math.min(1, maxdim / Math.max(w, h)); // cap render surface
       renderer.setSize(w, h);
       program.uniforms.uResolution.value = [gl.drawingBufferWidth, gl.drawingBufferHeight];
+      if (lowPower) renderStatic();
     };
 
     const ro = new ResizeObserver(resize);
@@ -372,7 +388,8 @@ export default function PrismaticBurst({
       renderer.render({ scene: meshRef.current });
       raf = requestAnimationFrame(update);
     };
-    raf = requestAnimationFrame(update);
+    // low-power devices already rendered a static frame in resize(); don't loop
+    if (!lowPower) raf = requestAnimationFrame(update);
 
     return () => {
       cancelAnimationFrame(raf);
