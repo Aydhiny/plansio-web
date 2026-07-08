@@ -1,51 +1,7 @@
-const SERVICES = [
-  {
-    no: "01",
-    title: (
-      <>
-        marketing that <span className="serif">means</span> it
-      </>
-    ),
-    line: "Positioning, campaigns & content that move real numbers — built on strategy, not vanity metrics.",
-    tags: ["Strategy", "Campaigns", "SEO", "Social"],
-    delay: "",
-  },
-  {
-    no: "02",
-    title: (
-      <>
-        identity with a <span className="serif">pulse</span>
-      </>
-    ),
-    line: "Logos & brand systems built to be remembered — everywhere they live, from a favicon to a billboard.",
-    tags: ["Identity", "Systems", "Art direction", "Motion"],
-    delay: "d1",
-  },
-  {
-    no: "03",
-    title: (
-      <>
-        full-stack apps &amp; <span className="serif">websites</span>
-      </>
-    ),
-    line: "From a landing page to a production web app — designed, built and shipped end to end by the same team.",
-    tags: ["Web apps", "Websites", "APIs", "Product UX"],
-    delay: "d2",
-  },
-  {
-    no: "04",
-    title: (
-      <>
-        games worth <span className="serif">playing</span>
-      </>
-    ),
-    line: "Original games and interactive worlds — from mechanics and art to release. We ship our own titles, and we can ship yours.",
-    tags: ["Game design", "Unity", "Web games", "Narrative"],
-    delay: "d1",
-  },
-];
+import type { Dict } from "../i18n";
 
-export default function Services() {
+export default function Services({ d }: { d: Dict }) {
+  const s = d.services;
   return (
     <section className="svcs" id="work" data-screen-label="Work">
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -53,26 +9,26 @@ export default function Services() {
       <div className="wrap">
         <div className="shead rv">
           <h2>
-            one studio,
+            {s.h1}
             <br />
-            <span className="serif grad-t">the whole stack.</span>
+            <span className="serif grad-t">{s.h2}</span>
           </h2>
-          <p>
-            Three disciplines, one team — carrying every project from the first spark of an idea to the thing people
-            actually use.
-          </p>
+          <p>{s.lead}</p>
         </div>
 
         <div className="svc-list">
-          {SERVICES.map((s) => (
-            <article className={`svc rv ${s.delay}`.trim()} key={s.no}>
-              <span className="svc-no">{s.no}</span>
+          {s.items.map((it, i) => (
+            <article className={`svc rv ${i === 1 ? "d1" : i >= 2 ? "d2" : ""}`.trim()} key={it.no}>
+              <span className="svc-no">{it.no}</span>
               <div className="svc-main">
-                <h3 className="svc-title">{s.title}</h3>
-                <p className="svc-line">{s.line}</p>
+                <h3 className="svc-title">
+                  {it.pre} <span className="serif">{it.accent}</span>
+                  {it.post ? ` ${it.post}` : ""}
+                </h3>
+                <p className="svc-line">{it.line}</p>
               </div>
               <div className="svc-tags">
-                {s.tags.map((t) => (
+                {it.tags.map((t) => (
                   <span key={t}>{t}</span>
                 ))}
               </div>
@@ -82,10 +38,10 @@ export default function Services() {
 
         <div className="svc-foot rv d1">
           <p>
-            Many projects. <span className="serif grad-t">One partner</span> who carries all of them, start to finish.
+            {s.footPre} <span className="serif grad-t">{s.footAccent}</span> {s.footPost}
           </p>
           <a className="btn solid" href="#contact">
-            <span>Start a project</span> <span className="ar">↗</span>
+            <span>{s.start}</span> <span className="ar">↗</span>
           </a>
         </div>
       </div>

@@ -1,17 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { Dict, Locale } from "../i18n";
+import LanguageSwitcher from "./LanguageSwitcher";
 
-const LINKS = [
-  { href: "#work", label: "Work" },
-  { href: "#studio", label: "Studio" },
-  { href: "#pricing", label: "Pricing" },
-];
-
-export default function Nav() {
+export default function Nav({ d, locale }: { d: Dict; locale: Locale }) {
   const [open, setOpen] = useState(false);
+  const links = [
+    { href: "#work", label: d.nav.work },
+    { href: "#studio", label: d.nav.studio },
+    { href: "#pricing", label: d.nav.pricing },
+  ];
 
-  // lock page scroll while the mobile menu is open, and close on Esc / desktop resize
   useEffect(() => {
     document.documentElement.classList.toggle("menu-open", open);
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
@@ -36,19 +36,20 @@ export default function Nav() {
       </a>
 
       <div className="nav-r">
-        {LINKS.map((l) => (
+        {links.map((l) => (
           <a key={l.href} href={l.href}>
             {l.label}
           </a>
         ))}
+        <LanguageSwitcher locale={locale} />
         <a className="btn solid" href="#contact">
-          <span>Start a project</span>
+          <span>{d.nav.start}</span>
         </a>
       </div>
 
       <button
         className={`nav-burger${open ? " open" : ""}`}
-        aria-label={open ? "Close menu" : "Open menu"}
+        aria-label={open ? d.nav.close : d.nav.open}
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen((v) => !v)}
@@ -60,7 +61,7 @@ export default function Nav() {
 
       <div id="mobile-menu" className={`nav-menu${open ? " open" : ""}`} aria-hidden={!open}>
         <div className="nav-menu-inner">
-          {LINKS.map((l, i) => (
+          {links.map((l, i) => (
             <a
               key={l.href}
               href={l.href}
@@ -73,11 +74,14 @@ export default function Nav() {
           <a
             className="btn solid"
             href="#contact"
-            style={{ transitionDelay: `${0.06 * LINKS.length + 0.05}s` }}
+            style={{ transitionDelay: `${0.06 * links.length + 0.05}s` }}
             onClick={() => setOpen(false)}
           >
-            <span>Start a project</span> <span className="ar">↗</span>
+            <span>{d.nav.start}</span> <span className="ar">↗</span>
           </a>
+          <div style={{ transitionDelay: `${0.06 * (links.length + 1) + 0.05}s` }}>
+            <LanguageSwitcher locale={locale} />
+          </div>
         </div>
       </div>
     </nav>

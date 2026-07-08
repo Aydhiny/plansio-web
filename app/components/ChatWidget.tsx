@@ -1,15 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { Dict } from "../i18n";
 
 const EMAIL = "hello@plansio.studio";
+type ChatDict = Dict["chat"];
 
 /*
  * Small playful chat launcher, bottom-right. A "Pick me!" teaser pops in after
  * a beat; clicking opens a compact on-brand panel with a few canned lines and a
  * message box that hands off to email. Pure client island, no backend.
  */
-export default function ChatWidget() {
+export default function ChatWidget({ d }: { d: ChatDict }) {
   const [open, setOpen] = useState(false);
   const [teaser, setTeaser] = useState(false);
   const [msg, setMsg] = useState("");
@@ -35,11 +37,11 @@ export default function ChatWidget() {
     <div className={`chat${open ? " open" : ""}`}>
       {!open && teaser && (
         <button className="chat-teaser" onClick={openPanel}>
-          <span className="chat-wave" aria-hidden="true">👋</span> Pick me!
+          <span className="chat-wave" aria-hidden="true">👋</span> {d.teaser}
         </button>
       )}
 
-      <div className="chat-panel" role="dialog" aria-label="Chat with Plansio" aria-hidden={!open}>
+      <div className="chat-panel" role="dialog" aria-label="Plansio" aria-hidden={!open}>
         <div className="chat-head">
           <span className="chat-ava" aria-hidden="true">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -47,25 +49,25 @@ export default function ChatWidget() {
           </span>
           <div className="chat-id">
             <strong>Plansio</strong>
-            <em>marketing · design · software</em>
+            <em>{d.subtitle}</em>
           </div>
-          <button className="chat-x" onClick={() => setOpen(false)} aria-label="Close chat">
+          <button className="chat-x" onClick={() => setOpen(false)} aria-label={d.close}>
             ✕
           </button>
         </div>
         <div className="chat-body">
-          <div className="chat-msg">Hey 👋</div>
-          <div className="chat-msg">
-            Pick us and you get marketing, design and code from one team — no handoffs, no five-agency chaos.
-          </div>
-          <div className="chat-msg">So… what are you building?</div>
+          {d.msgs.map((m, i) => (
+            <div className="chat-msg" key={i}>
+              {m}
+            </div>
+          ))}
         </div>
         <form className="chat-input" onSubmit={send}>
           <input
             value={msg}
             onChange={(e) => setMsg(e.target.value)}
-            placeholder="Tell us what you're making…"
-            aria-label="Your message"
+            placeholder={d.placeholder}
+            aria-label={d.placeholder}
           />
           <button type="submit" className="chat-send" aria-label="Send">
             ↗
@@ -76,7 +78,7 @@ export default function ChatWidget() {
       <button
         className="chat-fab"
         onClick={() => (open ? setOpen(false) : openPanel())}
-        aria-label={open ? "Close chat" : "Open chat"}
+        aria-label={open ? d.close : d.open}
         aria-expanded={open}
       >
         <svg className="chat-fab-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">

@@ -4,6 +4,7 @@ import SmoothScroll from "./components/SmoothScroll";
 import Effects from "./components/Effects";
 import Loader from "./components/Loader";
 import ChatWidget from "./components/ChatWidget";
+import { getDict, getLocale } from "./i18n";
 import "./globals.css";
 
 /*
@@ -42,40 +43,35 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://plansio.studio";
 const DESCRIPTION =
   "A full-stack studio — marketing, design, software and games, handled by one team from the first idea to launch day.";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: "Plansio — Marketing · Design · Software · Games",
-    template: "%s — Plansio",
-  },
-  description: DESCRIPTION,
-  applicationName: "Plansio",
-  keywords: [
-    "Plansio",
-    "creative studio",
-    "marketing agency",
-    "brand design",
-    "product design",
-    "web development",
-    "game development",
-    "full-stack studio",
-  ],
-  authors: [{ name: "Plansio" }],
-  creator: "Plansio",
-  alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    siteName: "Plansio",
-    url: "/",
-    title: "Plansio — Marketing · Design · Software · Games",
-    description: DESCRIPTION,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Plansio — Marketing · Design · Software · Games",
-    description: DESCRIPTION,
-  },
-};
+const DESCRIPTION_BS =
+  "Full-stack studio — marketing, dizajn, softver i igre, sve u rukama jednog tima, od prve ideje do dana lansiranja.";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const description = locale === "bs" ? DESCRIPTION_BS : DESCRIPTION;
+  const title = "Plansio — Marketing · Design · Software · Games";
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: { default: title, template: "%s — Plansio" },
+    description,
+    applicationName: "Plansio",
+    keywords: [
+      "Plansio",
+      "creative studio",
+      "marketing agency",
+      "brand design",
+      "product design",
+      "web development",
+      "game development",
+      "full-stack studio",
+    ],
+    authors: [{ name: "Plansio" }],
+    creator: "Plansio",
+    alternates: { canonical: "/" },
+    openGraph: { type: "website", siteName: "Plansio", url: "/", title, description, locale: locale === "bs" ? "bs_BA" : "en_US" },
+    twitter: { card: "summary_large_image", title, description },
+  };
+}
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -83,12 +79,14 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = await getLocale();
+  const dict = getDict(locale);
   return (
     // `js` mirrors the original inline <script> that gated entrance animations on
     // JS being available; set statically so first paint already carries the class.
     <html
-      lang="en"
+      lang={locale}
       className={`js ${display.variable} ${body.variable} ${serif.variable} ${mono.variable}`}
     >
       <body>
@@ -108,7 +106,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Effects />
 
         {/* bottom-right chat launcher */}
-        <ChatWidget />
+        <ChatWidget d={dict.chat} />
 
         {/* GTA VI-style intro overlay — rendered last so it sits on top */}
         <Loader />

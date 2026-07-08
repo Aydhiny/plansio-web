@@ -1,6 +1,7 @@
 import PrismaticBurst from "./PrismaticBurst";
+import type { Dict } from "../i18n";
 
-export default function Hero() {
+export default function Hero({ d }: { d: Dict }) {
   return (
     <header className="hero" id="top" data-screen-label="Hero">
       {/* Prismatic Burst (ogl) — soft light rays over the white hero */}
@@ -30,7 +31,7 @@ export default function Hero() {
           <img className="ref" src="/assets/plansio-logo.png" alt="" />
         </div>
         <h1 className="giant split">
-          {["We", "build", "brands,", "products", "&"].map((word, i) => (
+          {d.hero.pre.map((word, i) => (
             <span className="w" key={i}>
               <span className="wi" style={{ transitionDelay: `${0.3 + i * 0.06}s` }}>
                 {word}
@@ -38,21 +39,18 @@ export default function Hero() {
             </span>
           ))}
           <span className="w">
-            <span className="wi serif grad-t sheen" style={{ transitionDelay: "0.6s" }}>
-              worlds.
+            <span className="wi serif grad-t sheen" style={{ transitionDelay: `${0.3 + d.hero.pre.length * 0.06}s` }}>
+              {d.hero.accent}
             </span>
           </span>
         </h1>
-        <p className="hero-sub anim a3">
-          A full-stack studio — marketing, design, software and games, handled by one team from the first idea to
-          launch day.
-        </p>
+        <p className="hero-sub anim a3">{d.hero.sub}</p>
         <div className="hero-cta anim a4">
           <a className="btn solid" href="#contact">
-            <span>Start a project</span> <span className="ar">↗</span>
+            <span>{d.hero.start}</span> <span className="ar">↗</span>
           </a>
           <a className="btn ghost" href="#work">
-            <span>See the work</span>
+            <span>{d.hero.work}</span>
           </a>
         </div>
       </div>

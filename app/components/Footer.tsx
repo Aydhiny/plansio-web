@@ -1,6 +1,12 @@
+import type { Dict } from "../i18n";
+
 const EMAIL = "hello@plansio.studio";
 
-export default function Footer() {
+export default function Footer({ d }: { d: Dict }) {
+  const f = d.footer;
+  const studioHrefs = ["#work", "#studio", "#pricing", "#contact"];
+  const serviceHrefs = ["#work", "#work", "#work", "#work"];
+  const connectHrefs = ["#", "#", "#", `mailto:${EMAIL}`];
   return (
     <footer className="footer">
       <div className="wrap">
@@ -11,39 +17,39 @@ export default function Footer() {
               <img src="/assets/plansio-logo.png" alt="" />
               Plansio
             </div>
-            <p>
-              One team across marketing, design and software — so your brand isn&apos;t stitched together from five
-              different agencies.
-            </p>
+            <p>{f.blurb}</p>
           </div>
           <div className="fcol">
-            <h4>Studio</h4>
-            <a href="#work">Work</a>
-            <a href="#studio">About</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#contact">Contact</a>
+            <h4>{f.studio}</h4>
+            {f.lStudio.map((label, i) => (
+              <a key={label} href={studioHrefs[i]}>
+                {label}
+              </a>
+            ))}
           </div>
           <div className="fcol">
-            <h4>Services</h4>
-            <a href="#work">Marketing</a>
-            <a href="#work">Graphic design</a>
-            <a href="#work">Software</a>
-            <a href="#work">Games</a>
+            <h4>{f.services}</h4>
+            {f.lServices.map((label, i) => (
+              <a key={label} href={serviceHrefs[i]}>
+                {label}
+              </a>
+            ))}
           </div>
           <div className="fcol">
-            <h4>Connect</h4>
-            <a href="#">Instagram</a>
-            <a href="#">LinkedIn</a>
-            <a href="#">Dribbble</a>
-            <a href={`mailto:${EMAIL}`}>Email</a>
+            <h4>{f.connect}</h4>
+            {f.lConnect.map((label, i) => (
+              <a key={label} href={connectHrefs[i]}>
+                {label}
+              </a>
+            ))}
           </div>
         </div>
         <div className="fword parallax" data-speed="0.05">
           Plansio
         </div>
         <div className="fbot">
-          <span>© 2026 Plansio Studio</span>
-          <span>Design, code &amp; strategy under one roof</span>
+          <span>{f.rights}</span>
+          <span>{f.tagline}</span>
         </div>
       </div>
     </footer>
