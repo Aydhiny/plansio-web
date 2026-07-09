@@ -1,20 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Dict } from "../i18n";
 
-const EMAIL = "hello@plansio.studio";
 type ChatDict = Dict["chat"];
+type Msg = { role: "user" | "assistant"; content: string };
 
 /*
- * Small playful chat launcher, bottom-right. A "Pick me!" teaser pops in after
- * a beat; clicking opens a compact on-brand panel with a few canned lines and a
- * message box that hands off to email. Pure client island, no backend.
+ * Bottom-right AI concierge. A "Pick me!" teaser pops in after a beat; opening
+ * shows the localized intro lines, then a real conversation powered by /api/chat
+ * (Claude). With no ANTHROPIC_API_KEY the API returns a friendly fallback, so it
+ * always works.
  */
 export default function ChatWidget({ d }: { d: ChatDict }) {
   const [open, setOpen] = useState(false);
   const [teaser, setTeaser] = useState(false);
-  const [msg, setMsg] = useState("");
+  const [input, setInput] = useState("");
+  const [pending, setPending] = useState(false);
+  const [messages, setMessages] = useState<Msg[]>(() => d.msgs.map((m) => ({ role: "assistant" as const, content: m })));
+  const bodyRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (open) return;
@@ -22,15 +26,38 @@ export default function ChatWidget({ d }: { d: ChatDict }) {
     return () => clearTimeout(t);
   }, [open]);
 
+  useEffect(() => {
+    if (bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
+  }, [messages, pending, open]);
+
   const openPanel = () => {
     setOpen(true);
     setTeaser(false);
   };
 
-  const send = (e: React.FormEvent) => {
+  const send = async (e: React.FormEvent) => {
     e.preventDefault();
-    const body = encodeURIComponent(msg.trim() || "Hi Plansio — I'd like to start a project.");
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent("New project")}&body=${body}`;
+    const text = input.trim();
+    if (!text || pending) return;
+    const next: Msg[] = [...messages, { role: "user", content: text }];
+    setMessages(next);
+    setInput("");
+    setPending(true);
+    const locale = typeof document !== "undefined" ? document.documentElement.lang : "en";
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        // don't resend the canned intro lines as history
+        body: JSON.stringify({ messages: next.slice(d.msgs.length), locale }),
+      });
+      const data = (await res.json()) as { reply?: string };
+      setMessages((m) => [...m, { role: "assistant", content: data.reply || "…" }]);
+    } catch {
+      setMessages((m) => [...m, { role: "assistant", content: "Try again in a moment, or email hello@plansio.studio." }]);
+    } finally {
+      setPending(false);
+    }
   };
 
   return (
@@ -55,21 +82,28 @@ export default function ChatWidget({ d }: { d: ChatDict }) {
             ✕
           </button>
         </div>
-        <div className="chat-body">
-          {d.msgs.map((m, i) => (
-            <div className="chat-msg" key={i}>
-              {m}
+        <div className="chat-body" ref={bodyRef}>
+          {messages.map((m, i) => (
+            <div className={`chat-msg${m.role === "user" ? " me" : ""}`} key={i}>
+              {m.content}
             </div>
           ))}
+          {pending && (
+            <div className="chat-msg chat-typing" aria-label="Typing">
+              <span />
+              <span />
+              <span />
+            </div>
+          )}
         </div>
         <form className="chat-input" onSubmit={send}>
           <input
-            value={msg}
-            onChange={(e) => setMsg(e.target.value)}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             placeholder={d.placeholder}
             aria-label={d.placeholder}
           />
-          <button type="submit" className="chat-send" aria-label="Send">
+          <button type="submit" className="chat-send" aria-label="Send" disabled={pending}>
             ↗
           </button>
         </form>

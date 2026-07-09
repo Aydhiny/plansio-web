@@ -1,5 +1,8 @@
 import type { Dict } from "../i18n";
 
+// optional Cal.com (or any booking) link for the featured "Book the studio" tier
+const CAL = process.env.NEXT_PUBLIC_CAL_LINK;
+
 function Check() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="#c238cf" strokeWidth="2.5">
@@ -41,7 +44,11 @@ export default function Pricing({ d }: { d: Dict }) {
                     </li>
                   ))}
                 </ul>
-                <a className={`btn ${hi ? "solid" : "ghost"}`} href="#contact">
+                <a
+                  className={`btn ${hi ? "solid" : "ghost"}`}
+                  href={hi && CAL ? CAL : "#contact"}
+                  {...(hi && CAL ? { target: "_blank", rel: "noreferrer" } : {})}
+                >
                   <span>{t.cta}</span>
                   {hi && <span className="ar">↗</span>}
                 </a>

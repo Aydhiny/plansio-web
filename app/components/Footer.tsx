@@ -57,6 +57,7 @@ export default function Footer({ d, settings }: { d: Dict; settings?: SiteSettin
         <div className="fbot">
           <span>{f.rights}</span>
           <span className="fbot-links">
+            <a href="/faq">FAQ</a>
             <a href="/privacy">{d.ui.privacy}</a>
             <a href="/terms">{d.ui.terms}</a>
           </span>

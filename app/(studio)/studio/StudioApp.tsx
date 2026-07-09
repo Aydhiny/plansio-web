@@ -17,9 +17,13 @@ const TABS: { id: Tab; label: string }[] = [
 export default function StudioApp({
   initialSettings,
   initialProducts,
+  defaultSettings,
+  defaultProducts,
 }: {
   initialSettings: SiteSettings;
   initialProducts: Product[];
+  defaultSettings: SiteSettings;
+  defaultProducts: Product[];
 }) {
   const [settings, setSettings] = useState<SiteSettings>(initialSettings);
   const [products, setProducts] = useState<Product[]>(initialProducts);
@@ -89,6 +93,13 @@ export default function StudioApp({
     window.location.reload();
   };
 
+  const reset = () => {
+    if (!confirm("Reset all content and theme back to the built-in defaults? (Save afterwards to apply.)")) return;
+    setSettings(defaultSettings);
+    setProducts(defaultProducts);
+    setDirty(true);
+  };
+
   return (
     <div className="st-app">
       <header className="st-topbar">
@@ -115,6 +126,9 @@ export default function StudioApp({
           <a className="st-btn st-btn-ghost" href="/" target="_blank" rel="noreferrer">
             View site ↗
           </a>
+          <button className="st-btn st-btn-ghost" onClick={reset}>
+            Reset
+          </button>
           <button className="st-btn st-btn-ghost" onClick={logout}>
             Log out
           </button>

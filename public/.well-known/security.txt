@@ -1,0 +1,4 @@
+Contact: mailto:hello@plansio.studio
+Preferred-Languages: en, bs
+Canonical: https://plansio.studio/.well-known/security.txt
+Expires: 2027-01-01T00:00:00.000Z

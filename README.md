@@ -59,8 +59,19 @@ build under Next 16's Turbopack; the standalone studio is the reliable path.)
 | Var | Purpose |
 | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | canonical/OG/sitemap base URL |
-| `SANITY_PROJECT_ID` / `SANITY_DATASET` | enable CMS-backed products |
+| `STUDIO_PASSWORD` / `STUDIO_SECRET` | password + session secret for `/studio` (default password `plansio` — change it) |
+| `KV_REST_API_URL` / `KV_REST_API_TOKEN` | Vercel KV persistence for Studio edits in prod (falls back to `.data/*.json` in dev) |
+| `ANTHROPIC_API_KEY` | powers the AI concierge chat (falls back to a friendly canned reply without it) |
+| `NEXT_PUBLIC_CAL_LINK` | booking link for the featured "Book the studio" pricing tier |
 | `RESEND_API_KEY` / `CONTACT_TO` | activate contact-form email delivery |
+| `SANITY_PROJECT_ID` / `SANITY_DATASET` | alternative CMS source for products (optional) |
+
+## Studio & extras
+
+- **`/studio`** — a custom, password-gated admin (theme colors, brand/copy, product CRUD) that persists to KV/file and re-themes the site live.
+- **AI concierge** — the bottom-right chat talks to Claude (`/api/chat`) grounded in the studio's products.
+- **⌘K command palette**, **animated count-up stats**, **FAQ** (`/faq`, with `FAQPage` schema), cross-document **view transitions**, `security.txt`, and richer Organization JSON-LD.
+- **CI** (`.github/workflows/ci.yml`) runs build + Playwright smoke tests on every push/PR.
 
 ## Structure
 

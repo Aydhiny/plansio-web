@@ -1,4 +1,5 @@
 import type { Dict } from "../i18n";
+import CountUp from "./CountUp";
 
 const STAT_NUMBERS = ["120+", "3", "100%"];
 
@@ -20,7 +21,9 @@ export default function Manifesto({ d }: { d: Dict }) {
         <div className="mani-stats rv d3">
           {m.stats.map((label, i) => (
             <div className="ms" key={label}>
-              <div className="ms-n grad-t">{STAT_NUMBERS[i]}</div>
+              <div className="ms-n grad-t">
+                <CountUp value={STAT_NUMBERS[i]} />
+              </div>
               <div className="ms-l">{label}</div>
             </div>
           ))}

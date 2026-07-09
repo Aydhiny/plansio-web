@@ -1,0 +1,129 @@
+/* ============================================================
+   FAQ accordion — clean premium light aesthetic.
+   Relies on global tokens from globals.css:
+   --ink --ink-70 --ink-45 --line --line-2 --void --c-coral
+   --ease --font-body --font-display --font-mono
+   ============================================================ */
+
+.faq {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  border-top: 1px solid var(--line);
+}
+
+.row {
+  border-bottom: 1px solid var(--line);
+}
+
+/* h3 wrapper carries no visual weight — the button does the work. */
+.head {
+  margin: 0;
+  font: inherit;
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(1.1rem, 2.4vw, 1.5rem) 0.25rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  color: var(--ink);
+  transition: color 0.25s var(--ease), padding-left 0.35s var(--ease);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.trigger:hover {
+  color: var(--c-coral);
+  padding-left: 0.6rem;
+}
+
+.q {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+/* Chevron indicator — coral, rotates 180deg when open. */
+.icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  color: var(--c-coral);
+  transition: transform 0.4s var(--ease);
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.icon[data-open="true"] {
+  transform: rotate(180deg);
+}
+
+/* ---- collapsible region: grid-template-rows 0fr <-> 1fr ---- */
+.region {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s var(--ease);
+}
+
+.region[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+/* The single grid child must have min-height:0 + overflow:hidden
+   so the 0fr row can actually collapse it to zero. */
+.regionInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.a {
+  margin: 0;
+  padding: 0 2.6rem 1.5rem 0.25rem;
+  color: var(--ink-70);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: clamp(0.95rem, 1.6vw, 1.02rem);
+  line-height: 1.6;
+  /* Fade + slight rise the answer text in once expanded. */
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.35s var(--ease) 0.05s, transform 0.35s var(--ease) 0.05s;
+}
+
+.region[data-open="true"] .a {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- reduced motion: instant show/hide, no animation ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .icon,
+  .region,
+  .a {
+    transition: none;
+  }
+
+  .trigger:hover {
+    padding-left: 0.25rem;
+  }
+
+  .a {
+    opacity: 1;
+    transform: none;
+  }
+}

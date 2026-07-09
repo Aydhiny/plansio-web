@@ -1,0 +1,170 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 12vh 16px 16px;
+  background: rgba(10, 8, 16, 0.4);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  animation: cp-fade 0.18s var(--ease, ease) both;
+}
+
+.panel {
+  width: 100%;
+  max-width: 560px;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--void, #fff);
+  border: 1px solid var(--line, rgba(20, 15, 10, 0.1));
+  border-radius: 18px;
+  box-shadow:
+    0 24px 70px -20px rgba(10, 8, 16, 0.45),
+    0 8px 24px -12px rgba(10, 8, 16, 0.25);
+  font-family: var(--font-body), system-ui, sans-serif;
+  animation: cp-panel 0.22s var(--ease, cubic-bezier(0.22, 1, 0.36, 1)) both;
+}
+
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--line, rgba(20, 15, 10, 0.1));
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--ink, #141018);
+  font-family: inherit;
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.input::placeholder {
+  color: var(--ink-45, #857e94);
+}
+
+.kbd {
+  flex: none;
+  padding: 3px 8px;
+  border: 1px solid var(--line-2, rgba(20, 15, 10, 0.2));
+  border-radius: 7px;
+  background: var(--void-2, #f7f7fb);
+  color: var(--ink-45, #857e94);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+.results {
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 14px;
+  border-radius: 11px;
+  cursor: pointer;
+  color: var(--ink, #141018);
+}
+
+.rowActive {
+  background: var(--void-2, #f7f7fb);
+}
+
+.rowActive::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  border-radius: 3px;
+  background: var(--c-coral, #f36844);
+}
+
+.label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hint {
+  flex: none;
+  color: var(--ink-45, #857e94);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+  text-align: right;
+}
+
+.empty {
+  padding: 22px 14px;
+  text-align: center;
+  color: var(--ink-45, #857e94);
+  font-size: 0.9rem;
+}
+
+@keyframes cp-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cp-panel {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .backdrop {
+    padding: 8vh 10px 10px;
+  }
+  .panel {
+    max-width: none;
+    max-height: 78vh;
+    border-radius: 16px;
+  }
+  .input {
+    font-size: 1.05rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .panel {
+    animation: none;
+  }
+}

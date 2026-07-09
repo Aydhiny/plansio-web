@@ -42,3 +42,8 @@ next-env.d.ts
 
 # studio local content store
 /.data
+
+# playwright
+/test-results
+/playwright-report
+/e2e-results
