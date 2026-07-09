@@ -8,6 +8,8 @@
  * Drop-in schema: sanity/product.schema.ts.
  */
 
+import { getJSON, setJSON } from "./store";
+
 export type Localized = { en: string; bs: string };
 export type Locale = "en" | "bs";
 
@@ -187,8 +189,16 @@ async function fromSanity(): Promise<Product[] | null> {
   }
 }
 
+export const DEFAULT_PRODUCTS = SEED;
+
 export async function getAllProducts(): Promise<Product[]> {
+  const stored = await getJSON<Product[]>("products"); // Studio-edited content
+  if (stored && stored.length) return stored;
   return (await fromSanity()) ?? SEED;
+}
+
+export async function setProducts(products: Product[]): Promise<boolean> {
+  return setJSON("products", products);
 }
 
 export async function getProduct(slug: string): Promise<Product | null> {

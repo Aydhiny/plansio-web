@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Unbounded, Space_Grotesk, EB_Garamond, JetBrains_Mono } from "next/font/google";
 import { getLocale } from "./i18n";
+import { getSettings } from "@/lib/studio";
 
 /*
  * Root layout: just <html>/<body> + fonts + metadata. All visitor-facing chrome
@@ -48,11 +49,26 @@ export async function generateMetadata(): Promise<Metadata> {
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#ffffff" };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const locale = await getLocale();
+  const [locale, settings] = await Promise.all([getLocale(), getSettings()]);
+  const t = settings.theme;
+  // Studio-editable palette applied as inline custom properties (highest
+  // specificity → overrides the :root defaults in globals.css).
+  const themeVars = {
+    "--c-warm": t.warm,
+    "--c-coral": t.coral,
+    "--c-pink": t.pink,
+    "--c-blue": t.blue,
+    "--c-violet": t.violet,
+    "--c-mag": t.mag,
+  } as React.CSSProperties;
   return (
     // `js` gates entrance animations on JS being available; set statically so
     // first paint already carries the class.
-    <html lang={locale} className={`js ${display.variable} ${body.variable} ${serif.variable} ${mono.variable}`}>
+    <html
+      lang={locale}
+      className={`js ${display.variable} ${body.variable} ${serif.variable} ${mono.variable}`}
+      style={themeVars}
+    >
       <body>{children}</body>
     </html>
   );

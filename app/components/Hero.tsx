@@ -1,7 +1,14 @@
 import PrismaticBurst from "./PrismaticBurst";
 import type { Dict } from "../i18n";
 
-export default function Hero({ d }: { d: Dict }) {
+export default function Hero({ d, hero }: { d: Dict; hero?: { headline: string; sub: string } }) {
+  // Studio can override the headline (split by spaces, last word gets the
+  // gradient accent) and the subtext; empty falls back to the localized copy.
+  const custom = hero?.headline?.trim();
+  const words = custom ? custom.split(/\s+/) : null;
+  const pre = words && words.length > 1 ? words.slice(0, -1) : words ? [] : d.hero.pre;
+  const accent = words ? words[words.length - 1] : d.hero.accent;
+  const sub = hero?.sub?.trim() || d.hero.sub;
   return (
     <header className="hero" id="top" data-screen-label="Hero">
       {/* Prismatic Burst (ogl) — soft light rays over the white hero */}
@@ -31,7 +38,7 @@ export default function Hero({ d }: { d: Dict }) {
           <img className="ref" src="/assets/plansio-logo.png" alt="" />
         </div>
         <h1 className="giant split">
-          {d.hero.pre.map((word, i) => (
+          {pre.map((word, i) => (
             <span className="w" key={i}>
               <span className="wi" style={{ transitionDelay: `${0.3 + i * 0.06}s` }}>
                 {word}
@@ -39,12 +46,12 @@ export default function Hero({ d }: { d: Dict }) {
             </span>
           ))}
           <span className="w">
-            <span className="wi serif grad-t sheen" style={{ transitionDelay: `${0.3 + d.hero.pre.length * 0.06}s` }}>
-              {d.hero.accent}
+            <span className="wi serif grad-t sheen" style={{ transitionDelay: `${0.3 + pre.length * 0.06}s` }}>
+              {accent}
             </span>
           </span>
         </h1>
-        <p className="hero-sub anim a3">{d.hero.sub}</p>
+        <p className="hero-sub anim a3">{sub}</p>
         <div className="hero-cta anim a4">
           <a className="btn solid" href="#contact">
             <span>{d.hero.start}</span> <span className="ar">↗</span>

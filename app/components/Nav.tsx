@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import type { Dict, Locale } from "../i18n";
 import LanguageSwitcher from "./LanguageSwitcher";
 
-export default function Nav({ d, locale }: { d: Dict; locale: Locale }) {
+export default function Nav({ d, locale, brand = "Plansio" }: { d: Dict; locale: Locale; brand?: string }) {
   const [open, setOpen] = useState(false);
   const links = [
     { href: "/#work", label: d.nav.work },
@@ -32,7 +32,7 @@ export default function Nav({ d, locale }: { d: Dict; locale: Locale }) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/assets/plansio-logo.png" alt="" />
         <span className="wm">
-          <em>Plansio</em>
+          <em>{brand}</em>
         </span>
       </a>
 

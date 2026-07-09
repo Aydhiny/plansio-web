@@ -8,6 +8,7 @@ import Footer from "@/app/components/Footer";
 import Reveals from "@/app/components/Reveals";
 import CookieConsent from "@/app/components/CookieConsent";
 import { getDict, getLocale } from "@/app/i18n";
+import { getSettings } from "@/lib/studio";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -30,6 +31,7 @@ const orgJsonLd = {
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const locale = await getLocale();
   const dict = getDict(locale);
+  const settings = await getSettings();
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
@@ -46,9 +48,9 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <div className="pg-border" aria-hidden="true" />
 
       <SmoothScroll>
-        <Nav d={dict} locale={locale} />
+        <Nav d={dict} locale={locale} brand={settings.brand.name} />
         {children}
-        <Footer d={dict} />
+        <Footer d={dict} settings={settings} />
       </SmoothScroll>
 
       <Effects />

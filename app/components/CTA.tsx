@@ -1,10 +1,11 @@
 import ContactForm from "./ContactForm";
 import type { Dict } from "../i18n";
 
-const EMAIL = "hello@plansio.studio";
+const DEFAULT_EMAIL = "hello@plansio.studio";
 
-export default function CTA({ d }: { d: Dict }) {
+export default function CTA({ d, email = DEFAULT_EMAIL }: { d: Dict; email?: string }) {
   const c = d.cta;
+  const EMAIL = email;
   return (
     <section className="cta" id="contact" data-screen-label="Contact">
       {/* eslint-disable @next/next/no-img-element */}

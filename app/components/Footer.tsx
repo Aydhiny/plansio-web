@@ -1,12 +1,19 @@
 import type { Dict } from "../i18n";
+import type { SiteSettings } from "@/lib/studio";
 
-const EMAIL = "hello@plansio.studio";
-
-export default function Footer({ d }: { d: Dict }) {
+export default function Footer({ d, settings }: { d: Dict; settings?: SiteSettings }) {
   const f = d.footer;
-  const studioHrefs = ["#work", "#studio", "#pricing", "#contact"];
-  const serviceHrefs = ["#work", "#work", "#work", "#work"];
-  const connectHrefs = ["#", "#", "#", `mailto:${EMAIL}`];
+  const email = settings?.brand.email || "hello@plansio.studio";
+  const brand = settings?.brand.name || "Plansio";
+  const social = settings?.social;
+  const studioHrefs = ["/#work", "/#studio", "/#pricing", "/#contact"];
+  const serviceHrefs = ["/#work", "/#work", "/#work", "/#work"];
+  const connectHrefs = [
+    social?.instagram || "#",
+    social?.linkedin || "#",
+    social?.dribbble || "#",
+    `mailto:${email}`,
+  ];
   return (
     <footer className="footer">
       <div className="wrap">
@@ -15,7 +22,7 @@ export default function Footer({ d }: { d: Dict }) {
             <div className="wm">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/assets/plansio-logo.png" alt="" />
-              Plansio
+              {brand}
             </div>
             <p>{f.blurb}</p>
           </div>
@@ -45,7 +52,7 @@ export default function Footer({ d }: { d: Dict }) {
           </div>
         </div>
         <div className="fword parallax" data-speed="0.05">
-          Plansio
+          {brand}
         </div>
         <div className="fbot">
           <span>{f.rights}</span>

@@ -1,0 +1,203 @@
+/* ============================================================
+   PLANSIO STUDIO (admin) — shell, login, top bar. Uses the site's
+   design tokens (globals.css) so it matches the brand.
+   ============================================================ */
+
+.studio-root {
+  min-height: 100vh;
+  background: var(--void-2);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* ---------- login ---------- */
+.st-login {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: radial-gradient(90% 60% at 50% 0%, rgba(247, 178, 49, 0.08), transparent 60%), var(--void-2);
+}
+.st-login-card {
+  width: min(400px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 38px 30px 30px;
+  box-shadow: 0 40px 80px -50px rgba(20, 18, 28, 0.4);
+}
+.st-login-logo {
+  width: 52px;
+  filter: drop-shadow(0 6px 16px rgba(243, 104, 68, 0.4));
+}
+.st-login-title {
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.7rem;
+}
+.st-login-sub {
+  color: var(--ink-45);
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+.st-login-err {
+  color: #c0392b;
+  font-size: 0.86rem;
+}
+
+/* ---------- shared inputs / buttons ---------- */
+.st-input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.85em 1.05em;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.98rem;
+  color: var(--ink);
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.st-input:focus {
+  border-color: var(--c-coral);
+  box-shadow: 0 0 0 3px rgba(243, 104, 68, 0.14);
+}
+.st-btn {
+  border: 1px solid transparent;
+  border-radius: 100px;
+  padding: 0.7em 1.25em;
+  font-family: var(--font-body), sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s, background 0.25s, border-color 0.25s;
+}
+.st-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.st-btn-solid {
+  color: #2a1206;
+  background: var(--grad-warm-v);
+  box-shadow: 0 8px 22px -12px rgba(243, 104, 68, 0.6);
+}
+.st-btn-solid:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+.st-btn-ghost {
+  color: var(--ink-70);
+  background: #fff;
+  border-color: var(--line);
+}
+.st-btn-ghost:hover {
+  color: var(--ink);
+  border-color: var(--line-2);
+}
+
+/* ---------- app shell ---------- */
+.st-app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.st-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 14px clamp(16px, 3vw, 32px);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.st-topbrand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.st-topbrand img {
+  width: 26px;
+}
+.st-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-coral);
+  box-shadow: 0 0 10px rgba(243, 104, 68, 0.6);
+}
+.st-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--void-2);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 4px;
+}
+.st-tab {
+  border: none;
+  background: transparent;
+  border-radius: 100px;
+  padding: 0.5em 1.1em;
+  font-family: var(--font-body), sans-serif;
+  font-weight: 500;
+  font-size: 0.88rem;
+  color: var(--ink-45);
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.st-tab:hover {
+  color: var(--ink-70);
+}
+.st-tab.on {
+  color: var(--ink);
+  background: #fff;
+  box-shadow: 0 2px 8px -4px rgba(20, 18, 28, 0.3);
+}
+.st-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.st-main {
+  flex: 1;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 44px) clamp(16px, 3vw, 32px) 80px;
+}
+
+@media (max-width: 720px) {
+  .st-topbar {
+    gap: 12px;
+  }
+  .st-tabs {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+  .st-actions {
+    margin-left: auto;
+  }
+  .st-btn-ghost {
+    display: none;
+  }
+  .st-actions .st-btn-solid {
+    display: inline-block;
+  }
+}
