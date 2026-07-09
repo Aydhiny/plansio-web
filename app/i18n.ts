@@ -6,7 +6,25 @@ export const defaultLocale: Locale = "en";
 export const LOCALE_COOKIE = "NEXT_LOCALE";
 
 const en = {
-  nav: { work: "Work", studio: "Studio", pricing: "Pricing", start: "Start a project", open: "Open menu", close: "Close menu" },
+  nav: { work: "Work", studio: "Studio", pricing: "Pricing", products: "Products", start: "Start a project", open: "Open menu", close: "Close menu" },
+  products: {
+    title: "things we've",
+    accent: "shipped.",
+    lead: "Real products, designed and built end to end. Explore them live.",
+    live: "Live",
+    beta: "Beta",
+    wip: "In progress",
+    overview: "Overview",
+    features: "Features",
+    stack: "Built with",
+    platforms: "Platforms",
+    related: "More from the studio",
+    visit: "Open live app",
+    watch: "Watch trailer",
+    clickToLoad: "Click to load the live app",
+    back: "All products",
+    view: "View product",
+  },
   hero: {
     pre: ["We", "build", "brands,", "products", "&"],
     accent: "worlds.",
@@ -106,7 +124,25 @@ const en = {
 export type Dict = typeof en;
 
 const bs: Dict = {
-  nav: { work: "Radovi", studio: "Studio", pricing: "Cijene", start: "Započni projekt", open: "Otvori meni", close: "Zatvori meni" },
+  nav: { work: "Radovi", studio: "Studio", pricing: "Cijene", products: "Proizvodi", start: "Započni projekt", open: "Otvori meni", close: "Zatvori meni" },
+  products: {
+    title: "stvari koje smo",
+    accent: "napravili.",
+    lead: "Stvarni proizvodi, dizajnirani i izgrađeni od početka do kraja. Isprobajte ih uživo.",
+    live: "Uživo",
+    beta: "Beta",
+    wip: "U izradi",
+    overview: "Pregled",
+    features: "Mogućnosti",
+    stack: "Napravljeno pomoću",
+    platforms: "Platforme",
+    related: "Još iz studija",
+    visit: "Otvori aplikaciju",
+    watch: "Pogledaj trailer",
+    clickToLoad: "Klikni da učitaš aplikaciju uživo",
+    back: "Svi proizvodi",
+    view: "Pogledaj proizvod",
+  },
   hero: {
     pre: ["Gradimo", "brendove,", "proizvode", "i"],
     accent: "svjetove.",

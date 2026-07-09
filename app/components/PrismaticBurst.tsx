@@ -274,7 +274,17 @@ export default function PrismaticBurst({
       (navigator.hardwareConcurrency || 8) <= 4;
     // hard cap the render surface (long side); soft output → upscale is invisible
     const maxdim = lowPower ? 560 : 820;
-    const renderer = new Renderer({ dpr: 1, alpha: false, antialias: false });
+
+    // WebGL can be unavailable (GPU disabled, too many live contexts, some mobile
+    // browsers). ogl throws from its constructor in that case — catch it so the
+    // hero just falls back to a clean white background instead of crashing.
+    let renderer: InstanceType<typeof Renderer>;
+    try {
+      renderer = new Renderer({ dpr: 1, alpha: false, antialias: false });
+    } catch {
+      return;
+    }
+    if (!renderer.gl) return;
     rendererRef.current = renderer;
 
     const gl = renderer.gl;

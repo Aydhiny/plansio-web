@@ -30,6 +30,27 @@ npm run build    # production build
 npm start        # serve the build
 ```
 
+## Products
+
+Products (Inkril, Musicle, Galaxus, Hunter Mouse 2) are data-driven from a single
+typed source — `lib/products.ts` — consumed by the products index (`/products`),
+detail pages (`/products/[slug]`), the home "featured" strip, related-products,
+the sitemap and per-product metadata. Web-app products render a **live embed** in
+a browser device-frame (lazy facade — the iframe loads only on click).
+
+**CMS (Sanity, optional):** the data layer auto-switches to Sanity when
+`SANITY_PROJECT_ID` (+ optional `SANITY_DATASET`) is set, and falls back to the
+local seed otherwise. Drop `sanity/product.schema.ts` into a Sanity Studio to
+manage products without deploys.
+
+## Environment
+
+| Var | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | canonical/OG/sitemap base URL |
+| `SANITY_PROJECT_ID` / `SANITY_DATASET` | enable CMS-backed products |
+| `RESEND_API_KEY` / `CONTACT_TO` | activate contact-form email delivery |
+
 ## Structure
 
 ```

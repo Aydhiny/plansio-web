@@ -38,19 +38,7 @@ export default function Effects() {
     }
     cleanups.push(() => clearTimeout(heroTimer));
 
-    // ---- reveals ----
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries)
-          if (e.isIntersecting) {
-            e.target.classList.add("in");
-            io.unobserve(e.target);
-          }
-      },
-      { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
-    );
-    document.querySelectorAll(".rv").forEach((el) => io.observe(el));
-    cleanups.push(() => io.disconnect());
+    // (scroll reveals live in Reveals.tsx so they re-run on route change)
 
     // ---- 3D logo tilt (pointer-reactive) ----
     (function logoTilt() {

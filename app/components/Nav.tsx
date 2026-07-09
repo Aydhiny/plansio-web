@@ -7,9 +7,10 @@ import LanguageSwitcher from "./LanguageSwitcher";
 export default function Nav({ d, locale }: { d: Dict; locale: Locale }) {
   const [open, setOpen] = useState(false);
   const links = [
-    { href: "#work", label: d.nav.work },
-    { href: "#studio", label: d.nav.studio },
-    { href: "#pricing", label: d.nav.pricing },
+    { href: "/#work", label: d.nav.work },
+    { href: "/products", label: d.nav.products },
+    { href: "/#studio", label: d.nav.studio },
+    { href: "/#pricing", label: d.nav.pricing },
   ];
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function Nav({ d, locale }: { d: Dict; locale: Locale }) {
 
   return (
     <nav className="nav" id="nav">
-      <a className="brand" href="#top" onClick={() => setOpen(false)}>
+      <a className="brand" href="/" onClick={() => setOpen(false)}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/assets/plansio-logo.png" alt="" />
         <span className="wm">
@@ -42,7 +43,7 @@ export default function Nav({ d, locale }: { d: Dict; locale: Locale }) {
           </a>
         ))}
         <LanguageSwitcher locale={locale} />
-        <a className="btn solid" href="#contact">
+        <a className="btn solid" href="/#contact">
           <span>{d.nav.start}</span>
         </a>
       </div>
@@ -73,7 +74,7 @@ export default function Nav({ d, locale }: { d: Dict; locale: Locale }) {
           ))}
           <a
             className="btn solid"
-            href="#contact"
+            href="/#contact"
             style={{ transitionDelay: `${0.06 * links.length + 0.05}s` }}
             onClick={() => setOpen(false)}
           >

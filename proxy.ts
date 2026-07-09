@@ -7,7 +7,7 @@ const COOKIE = "NEXT_LOCALE";
  * choice persists across pages. Bosnia (BA) — or a bs/hr/sr Accept-Language —
  * gets Bosnian; everyone else English. A manual switch overwrites this cookie.
  */
-export function middleware(req: NextRequest) {
+export default function proxy(req: NextRequest) {
   const res = NextResponse.next();
   if (!req.cookies.get(COOKIE)) {
     const country = (req.headers.get("x-vercel-ip-country") || "").toUpperCase();

@@ -4,6 +4,9 @@ import SmoothScroll from "./components/SmoothScroll";
 import Effects from "./components/Effects";
 import Loader from "./components/Loader";
 import ChatWidget from "./components/ChatWidget";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+import Reveals from "./components/Reveals";
 import { getDict, getLocale } from "./i18n";
 import "./globals.css";
 
@@ -100,10 +103,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <div className="pg-white" aria-hidden="true" />
         <div className="pg-border" aria-hidden="true" />
 
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          <Nav d={dict} locale={locale} />
+          {children}
+          <Footer d={dict} />
+        </SmoothScroll>
 
         {/* pointer/scroll/canvas behaviour, hydrated as one client island */}
         <Effects />
+        <Reveals />
 
         {/* bottom-right chat launcher */}
         <ChatWidget d={dict.chat} />
