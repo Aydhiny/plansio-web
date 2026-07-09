@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import LiveEmbed from "../../components/LiveEmbed";
-import VideoEmbed from "../../components/VideoEmbed";
-import ProductCard from "../../components/ProductCard";
-import { getDict, getLocale } from "../../i18n";
+import LiveEmbed from "@/app/components/LiveEmbed";
+import VideoEmbed from "@/app/components/VideoEmbed";
+import ProductCard from "@/app/components/ProductCard";
+import { getDict, getLocale } from "@/app/i18n";
 import { getAllProducts, getProduct, getRelated, t } from "@/lib/products";
 
 function youtubeId(url: string): string | null {

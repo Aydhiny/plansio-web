@@ -1,12 +1,12 @@
-import Hero from "./components/Hero";
-import BigMarquee from "./components/BigMarquee";
-import Services from "./components/Services";
-import Showcase from "./components/Showcase";
-import FeaturedProducts from "./components/FeaturedProducts";
-import Manifesto from "./components/Manifesto";
-import Pricing from "./components/Pricing";
-import CTA from "./components/CTA";
-import { getDict, getLocale } from "./i18n";
+import Hero from "@/app/components/Hero";
+import BigMarquee from "@/app/components/BigMarquee";
+import Services from "@/app/components/Services";
+import Showcase from "@/app/components/Showcase";
+import FeaturedProducts from "@/app/components/FeaturedProducts";
+import Manifesto from "@/app/components/Manifesto";
+import Pricing from "@/app/components/Pricing";
+import CTA from "@/app/components/CTA";
+import { getDict, getLocale } from "@/app/i18n";
 import { getAllProducts } from "@/lib/products";
 
 export default async function Home() {

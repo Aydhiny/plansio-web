@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import ProductCard from "../components/ProductCard";
-import { getDict, getLocale } from "../i18n";
+import ProductCard from "@/app/components/ProductCard";
+import { getDict, getLocale } from "@/app/i18n";
 import { getAllProducts } from "@/lib/products";
 
 export async function generateMetadata(): Promise<Metadata> {

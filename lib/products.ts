@@ -167,8 +167,8 @@ const SEED: Product[] = [
 ];
 
 /* --------------------------------------------------------------- accessor ---- */
-const PROJECT_ID = process.env.SANITY_PROJECT_ID;
-const DATASET = process.env.SANITY_DATASET || "production";
+const PROJECT_ID = process.env.SANITY_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const DATASET = process.env.SANITY_DATASET || process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 const API_VERSION = "2024-01-01";
 const PRODUCT_QUERY = `*[_type == "product"]|order(coalesce(order, 99) asc)`;
 

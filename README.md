@@ -39,9 +39,20 @@ the sitemap and per-product metadata. Web-app products render a **live embed** i
 a browser device-frame (lazy facade — the iframe loads only on click).
 
 **CMS (Sanity, optional):** the data layer auto-switches to Sanity when
-`SANITY_PROJECT_ID` (+ optional `SANITY_DATASET`) is set, and falls back to the
-local seed otherwise. Drop `sanity/product.schema.ts` into a Sanity Studio to
-manage products without deploys.
+`NEXT_PUBLIC_SANITY_PROJECT_ID` is set, and falls back to the local seed otherwise
+— the site reads content over Sanity's HTTP API, so it needs **no Sanity
+dependency**. To get an editing dashboard:
+
+```bash
+npm create sanity@latest -- --template clean --create-project "Plansio" --dataset production
+# copy sanity/product.schema.ts into the new studio's schemaTypes and register it
+cd <studio-folder> && npm run dev      # dashboard at http://localhost:3333
+npx sanity deploy                       # hosted dashboard at <name>.sanity.studio
+```
+
+Then set `NEXT_PUBLIC_SANITY_PROJECT_ID` (from the studio) on the site and it
+serves CMS content. (Embedded `/studio` was skipped — Sanity Studio doesn't yet
+build under Next 16's Turbopack; the standalone studio is the reliable path.)
 
 ## Environment
 
