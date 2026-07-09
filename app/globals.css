@@ -789,3 +789,54 @@ section.products{border-top:1px solid var(--line)}
 .pd-metric-l{font-family:var(--font-mono),monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);margin-top:9px}
 .pd-related{margin-top:clamp(56px,9vh,110px)}
 .pd-related .pd-h{margin-bottom:22px}
+
+/* ============================== PERF: content-visibility ============================== */
+/* skip rendering work for below-the-fold sections until they're near the
+   viewport — a real win on low-end devices. contain-intrinsic-size reserves
+   space to avoid scrollbar jump. */
+/* only non-anchor sections — applying this to #contact/#work/etc. would make
+   Lenis scroll-to land off, since intrinsic-size != real size until rendered. */
+.bigmarq,.footer{content-visibility:auto;contain-intrinsic-size:auto 620px}
+
+/* ============================== ERROR / 404 ============================== */
+.errpage{min-height:70vh;display:flex;align-items:center;justify-content:center;text-align:center}
+.err-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;padding:40px 0}
+.err-code{font-family:var(--font-display),sans-serif;font-weight:800;font-size:clamp(5rem,18vw,11rem);
+  letter-spacing:-.05em;line-height:.9}
+.err-title{font-family:var(--font-display),sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.6rem);
+  letter-spacing:-.03em;margin-top:8px}
+.err-body{color:var(--ink-70);font-size:1.05rem;max-width:38ch;margin:12px 0 26px}
+.err-acts{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.err-acts .btn{cursor:url('/assets/mac-cursor.png') 3 1, auto}
+
+/* ============================== LEGAL PAGES ============================== */
+.legal .wrap{max-width:760px}
+.legal h1{font-family:var(--font-display),sans-serif;font-weight:800;font-size:clamp(2.2rem,5vw,3.4rem);
+  letter-spacing:-.04em;line-height:1}
+.legal-updated{font-family:var(--font-mono),monospace;font-size:.72rem;letter-spacing:.08em;color:var(--ink-45);
+  margin:10px 0 30px}
+.legal h2{font-family:var(--font-display),sans-serif;font-weight:700;font-size:1.35rem;letter-spacing:-.02em;
+  margin:34px 0 10px}
+.legal p{color:var(--ink-70);line-height:1.7;font-size:1.02rem;margin-bottom:12px}
+.legal a{color:var(--c-coral);text-decoration:underline;text-underline-offset:3px}
+.legal code{font-family:var(--font-mono),monospace;font-size:.88em;background:var(--void-2);
+  padding:.15em .4em;border-radius:5px;border:1px solid var(--line)}
+.legal-note{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);font-size:.9rem;color:var(--ink-45)}
+
+/* ============================== HONEYPOT ============================== */
+.hp-field{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0;pointer-events:none}
+
+/* ============================== FOOTER LINKS ============================== */
+.fbot-links{display:inline-flex;gap:18px}
+.fbot-links a{color:var(--ink-45);transition:color .2s}
+.fbot-links a:hover{color:var(--ink)}
+
+/* ============================== COOKIE CONSENT ============================== */
+.consent{position:fixed;left:clamp(14px,3vw,28px);bottom:clamp(14px,3vw,28px);z-index:9989;
+  max-width:min(380px,88vw);display:flex;flex-direction:column;gap:12px;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px;
+  box-shadow:0 26px 56px -34px rgba(20,18,28,.4);animation:chatPop .5s var(--ease) both}
+.consent p{font-size:.92rem;line-height:1.5;color:var(--ink-70)}
+.consent-btn{align-self:flex-start}
+@media(max-width:520px){.consent{left:12px;right:12px;max-width:none;bottom:12px}}

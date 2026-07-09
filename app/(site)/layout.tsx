@@ -6,7 +6,20 @@ import ChatWidget from "@/app/components/ChatWidget";
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
 import Reveals from "@/app/components/Reveals";
+import CookieConsent from "@/app/components/CookieConsent";
 import { getDict, getLocale } from "@/app/i18n";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://plansio.studio";
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Plansio",
+  url: SITE_URL,
+  description: "A full-stack studio for marketing, design, software and games.",
+  email: "hello@plansio.studio",
+};
 
 /*
  * Site chrome layout. Everything visitor-facing lives here (atmosphere, smooth
@@ -19,6 +32,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   const dict = getDict(locale);
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       <a href="#top" className="skip-link">
         Skip to content
       </a>
@@ -40,7 +54,11 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <Effects />
       <Reveals />
       <ChatWidget d={dict.chat} />
+      <CookieConsent text={dict.ui.consent} ok={dict.ui.consentOk} />
       <Loader />
+
+      <Analytics />
+      <SpeedInsights />
     </>
   );
 }

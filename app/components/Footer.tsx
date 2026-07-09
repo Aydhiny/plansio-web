@@ -49,6 +49,10 @@ export default function Footer({ d }: { d: Dict }) {
         </div>
         <div className="fbot">
           <span>{f.rights}</span>
+          <span className="fbot-links">
+            <a href="/privacy">{d.ui.privacy}</a>
+            <a href="/terms">{d.ui.terms}</a>
+          </span>
           <span>{f.tagline}</span>
         </div>
       </div>

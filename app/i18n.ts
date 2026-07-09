@@ -98,6 +98,7 @@ const en = {
       unconfigured: "The form isn't wired up yet — email us at hello@plansio.studio and we'll jump on it.",
       send: "Something went wrong sending that. Try again, or email hello@plansio.studio.",
       network: "Network hiccup — try again in a moment.",
+      spam: "That looked like spam — try again in a moment.",
     },
   },
   footer: {
@@ -118,6 +119,19 @@ const en = {
     placeholder: "Tell us what you're making…",
     open: "Open chat",
     close: "Close chat",
+  },
+  ui: {
+    notFoundTitle: "Page not found",
+    notFoundBody: "That page wandered off. Let's get you back on track.",
+    home: "Back home",
+    errorTitle: "Something broke",
+    errorBody: "An unexpected error occurred on our end.",
+    retry: "Try again",
+    consent: "We use one cookie to remember your language. That's it.",
+    consentOk: "Got it",
+    privacy: "Privacy",
+    terms: "Terms",
+    spam: "That looked like spam — try again in a moment.",
   },
 };
 
@@ -216,6 +230,7 @@ const bs: Dict = {
       unconfigured: "Forma još nije povezana — pišite nam na hello@plansio.studio i odmah se javljamo.",
       send: "Nešto je pošlo po zlu pri slanju. Pokušajte ponovo ili pišite na hello@plansio.studio.",
       network: "Problem s mrežom — pokušajte ponovo za trenutak.",
+      spam: "Ovo je izgledalo kao spam — pokušajte ponovo za trenutak.",
     },
   },
   footer: {
@@ -236,6 +251,19 @@ const bs: Dict = {
     placeholder: "Reci nam šta praviš…",
     open: "Otvori chat",
     close: "Zatvori chat",
+  },
+  ui: {
+    notFoundTitle: "Stranica nije pronađena",
+    notFoundBody: "Ta stranica je odlutala. Vratimo vas na pravi put.",
+    home: "Nazad na početnu",
+    errorTitle: "Nešto se pokvarilo",
+    errorBody: "Došlo je do neočekivane greške na našoj strani.",
+    retry: "Pokušaj ponovo",
+    consent: "Koristimo jedan kolačić da zapamtimo vaš jezik. To je sve.",
+    consentOk: "U redu",
+    privacy: "Privatnost",
+    terms: "Uslovi",
+    spam: "Ovo je izgledalo kao spam — pokušajte ponovo za trenutak.",
   },
 };
 

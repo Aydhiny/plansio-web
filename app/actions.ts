@@ -1,7 +1,20 @@
 "use server";
 
-export type ContactError = "empty" | "long" | "email" | "unconfigured" | "send" | "network";
+import { headers } from "next/headers";
+
+export type ContactError = "empty" | "long" | "email" | "unconfigured" | "send" | "network" | "spam";
 export type ContactState = { ok?: boolean; error?: ContactError };
+
+// In-memory sliding-window rate limit (per instance) — a basic flood defense.
+// Swap for Upstash Redis if you need it shared across serverless instances.
+const hits = new Map<string, number[]>();
+function rateLimited(ip: string, max = 5, windowMs = 60_000): boolean {
+  const now = Date.now();
+  const arr = (hits.get(ip) || []).filter((t) => now - t < windowMs);
+  arr.push(now);
+  hits.set(ip, arr);
+  return arr.length > max;
+}
 
 /*
  * Contact server action. Sends via the Resend REST API (no SDK dependency) when
@@ -10,6 +23,13 @@ export type ContactState = { ok?: boolean; error?: ContactError };
  * (e.g. Vercel project settings) to activate delivery.
  */
 export async function sendContact(_prev: ContactState, formData: FormData): Promise<ContactState> {
+  // honeypot — a hidden field only bots fill. Pretend success so they don't retry.
+  if (String(formData.get("company") || "").trim()) return { ok: true };
+
+  const h = await headers();
+  const ip = (h.get("x-forwarded-for") || "").split(",")[0].trim() || "anon";
+  if (rateLimited(ip)) return { error: "spam" };
+
   const name = String(formData.get("name") || "").trim();
   const email = String(formData.get("email") || "").trim();
   const message = String(formData.get("message") || "").trim();

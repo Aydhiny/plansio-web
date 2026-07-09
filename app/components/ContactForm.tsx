@@ -14,6 +14,15 @@ export default function ContactForm({ d }: { d: Dict }) {
 
   return (
     <form className="contact" action={action}>
+      {/* honeypot — hidden from real users, catches bots */}
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hp-field"
+      />
       <div className="contact-row">
         <input name="name" placeholder={c.name} aria-label={c.name} autoComplete="name" required />
         <input name="email" type="email" placeholder={c.email} aria-label={c.email} autoComplete="email" required />
