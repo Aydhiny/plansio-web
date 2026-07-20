@@ -46,7 +46,14 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#ffffff" };
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0910" },
+  ],
+};
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const [locale, settings] = await Promise.all([getLocale(), getSettings()]);
@@ -68,8 +75,19 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       lang={locale}
       className={`js ${display.variable} ${body.variable} ${serif.variable} ${mono.variable}`}
       style={themeVars}
+      suppressHydrationWarning
     >
-      <body>{children}</body>
+      <body>
+        {/* Apply the saved/system theme before first paint — no flash of the
+            wrong palette. Kept tiny + inline so it runs synchronously. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var s=localStorage.getItem('theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme:dark)').matches;if(d)document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();",
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

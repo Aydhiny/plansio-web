@@ -943,3 +943,51 @@ section.products{border-top:1px solid var(--line)}
 .article-tags span:hover{border-color:var(--accent);color:var(--accent)}
 .article-related{margin-top:clamp(60px,10vh,110px)}
 .article-related .pd-h{margin-bottom:26px}
+
+/* ============================================================
+   DARK MODE
+   Opt-in via <html data-theme="dark"> (set pre-paint by an inline
+   script in layout.tsx, toggled by ThemeToggle). We override the core
+   tokens + the fixed atmosphere layers; everything else is token-driven
+   and adapts for free. color-scheme flips native form controls too.
+   ============================================================ */
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --void:    #0b0910;
+  --void-2:  #121019;
+  --panel:   #16131f;
+  --line:    rgba(255,255,255,.10);
+  --line-2:  rgba(255,255,255,.22);
+  --ink:     #f4f2fa;
+  --ink-70:  #b9b4c9;
+  --ink-45:  #837e94;
+  --glow:      0 0 60px -10px rgba(150,110,235,.55);
+  --glow-warm: 0 0 60px -10px rgba(243,104,68,.6);
+}
+
+/* atmosphere — swap the white washes for deep-space gradients */
+:root[data-theme="dark"] .atmos{background:
+  radial-gradient(ellipse 90% 55% at 88% -10%,rgba(247,150,90,.10),transparent 60%),
+  radial-gradient(ellipse 92% 66% at 4% 110%,rgba(140,95,235,.14),transparent 62%),
+  radial-gradient(ellipse 70% 50% at 92% 104%,rgba(198,80,214,.08),transparent 64%),
+  linear-gradient(178deg,#0b0910 0%,#0d0b14 46%,#0a0810 100%)}
+/* vapor multiply → screen so the coloured blobs glow instead of vanish */
+:root[data-theme="dark"] #vapor{mix-blend-mode:screen;opacity:.5}
+/* grid reads off --line already; nudge visibility + mask */
+:root[data-theme="dark"] .gridlines{opacity:.5}
+/* grain: multiply crushes to black on dark — soft-light keeps the texture */
+:root[data-theme="dark"] .grain{mix-blend-mode:soft-light;opacity:.5}
+
+/* hero prismatic burst: multiply is invisible on dark → screen as soft rays */
+:root[data-theme="dark"] .hero-burst canvas{mix-blend-mode:screen !important;opacity:.45}
+
+/* theme toggle button (nav) */
+.theme-toggle{display:inline-grid;place-items:center;width:38px;height:38px;flex:0 0 auto;
+  border:1px solid var(--line);border-radius:11px;background:var(--panel);color:var(--ink);cursor:pointer;
+  transition:border-color .2s var(--ease),transform .2s var(--ease),background .2s var(--ease)}
+.theme-toggle:hover{border-color:var(--line-2);transform:translateY(-1px)}
+.theme-toggle svg{width:18px;height:18px}
+.theme-toggle .icon-sun{display:none}
+.theme-toggle .icon-moon{display:block}
+:root[data-theme="dark"] .theme-toggle .icon-sun{display:block}
+:root[data-theme="dark"] .theme-toggle .icon-moon{display:none}

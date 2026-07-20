@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { Dict, Locale } from "../i18n";
 import LanguageSwitcher from "./LanguageSwitcher";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Nav({ d, locale, brand = "Plansio" }: { d: Dict; locale: Locale; brand?: string }) {
   const [open, setOpen] = useState(false);
@@ -43,6 +44,7 @@ export default function Nav({ d, locale, brand = "Plansio" }: { d: Dict; locale:
           </a>
         ))}
         <LanguageSwitcher locale={locale} />
+        <ThemeToggle label={d.nav.theme} />
         <a className="btn solid" href="/#contact">
           <span>{d.nav.start}</span>
         </a>
@@ -80,8 +82,11 @@ export default function Nav({ d, locale, brand = "Plansio" }: { d: Dict; locale:
           >
             <span>{d.nav.start}</span> <span className="ar">↗</span>
           </a>
-          <div style={{ transitionDelay: `${0.06 * (links.length + 1) + 0.05}s` }}>
+          <div
+            style={{ transitionDelay: `${0.06 * (links.length + 1) + 0.05}s`, display: "flex", gap: "10px", alignItems: "center" }}
+          >
             <LanguageSwitcher locale={locale} />
+            <ThemeToggle label={d.nav.theme} />
           </div>
         </div>
       </div>
