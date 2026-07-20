@@ -15,6 +15,10 @@ Built with the App Router, statically rendered, with a light-touch WebGL hero an
 ## Highlights
 
 - **Islands architecture** — the whole page is static HTML/CSS (SSG); only scroll, canvas, and pointer behaviour hydrate as small `'use client'` components.
+- **Three.js showpiece** (`/`, the "Lab" section) — a custom-GLSL noise-displaced icosahedron with a fresnel rim in the brand gradient + an additive orbiting particle constellation, pointer-reactive and theme-aware. Lazy-loaded (`dynamic ssr:false`) so `three` stays out of the initial bundle; DPR-capped, ~30fps, pauses off-screen, reduced-motion/low-core static frame, WebGL-failure fallback, full GPU disposal on unmount.
+- **Blog** (`/blog`) — data-driven articles from `lib/blog.ts` with a typed `Block[]` content model (localized, no raw-HTML injection surface), reading time, related posts and `BlogPosting` schema. Fully editable in the Studio.
+- **Projects** (`/projects`) — client case studies (challenge → approach → outcome + results), a data layer distinct from products, editable in the Studio.
+- **Dark mode** — opt-in `<html data-theme="dark">` applied pre-paint (no FOUC) from `localStorage`/`prefers-color-scheme`; a nav toggle flips it. Dark overrides the core tokens + atmosphere layers, everything else is token-driven.
 - **Prismatic Burst hero** — an `ogl` fragment shader, remapped to tinted-white so it reads as soft light rays on the white page. DPR-capped, 30fps, low-power, and pauses when off-screen.
 - **Performance-minded** — no per-frame full-screen repaints; the ambient wash and grid are static, RAF loops are throttled and torn down on unmount.
 - **Smooth scroll + parallax** — Lenis momentum with a scroll-linked parallax layer and a thin progress meter.
@@ -68,7 +72,7 @@ build under Next 16's Turbopack; the standalone studio is the reliable path.)
 
 ## Studio & extras
 
-- **`/studio`** — a custom, password-gated admin (theme colors, brand/copy, product CRUD) that persists to KV/file and re-themes the site live.
+- **`/studio`** — a custom, password-gated admin with tabs for **Theme**, **Brand & Copy**, **Products**, **Projects** and **Blog**. Full CRUD (the Blog tab has a block editor: paragraph / heading / quote / list / code / image, reorderable) persists to KV/file via `/api/studio/save` and `revalidatePath`, re-theming and republishing the site live.
 - **AI concierge** — the bottom-right chat talks to Claude (`/api/chat`) grounded in the studio's products.
 - **⌘K command palette**, **animated count-up stats**, **FAQ** (`/faq`, with `FAQPage` schema), cross-document **view transitions**, `security.txt`, and richer Organization JSON-LD.
 - **CI** (`.github/workflows/ci.yml`) runs build + Playwright smoke tests on every push/PR.
@@ -85,6 +89,11 @@ app/
     SmoothScroll.tsx     Lenis + parallax + scroll progress
     Effects.tsx          nav state, reveals, 3D logo tilt, vapor canvas
     PrismaticBurst.tsx   ogl WebGL hero backdrop
+    Scene3D.tsx / Lab.tsx  Three.js showpiece (lazy, client-only)
+    ThemeToggle.tsx      light/dark switch (pre-paint, no FOUC)
+    BlogCard / ArticleBody / ProjectCard  blog + projects UI
+lib/
+    products.ts / projects.ts / blog.ts   typed data layers (seed + Sanity + KV)
     Loader.tsx           intro loader
     ChatWidget.tsx       bottom-right chat launcher
 public/assets/           logo, palms, cursor
