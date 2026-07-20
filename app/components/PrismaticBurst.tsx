@@ -38,6 +38,7 @@ uniform vec2  uOffset;
 uniform sampler2D uGradient;
 uniform float uNoiseAmount;
 uniform int   uRayCount;
+uniform float uDark;
 
 float hash21(vec2 p){
     p = floor(p);
@@ -179,13 +180,20 @@ void main(){
     col *= edgeFade(frag, uResolution, uOffset);
     col *= uIntensity;
 
-    // LIGHT-BG output: turn additive rays-on-black into tinted-white so the
-    // effect reads as soft colored rays over a LIGHT hero (composited with
-    // mix-blend-mode: multiply). White where there's no ray, hue where there is.
-    float inten = clamp(max(max(col.r, col.g), col.b), 0.0, 1.0);
-    vec3 hue = col / max(inten, 1e-4);
-    vec3 outc = mix(vec3(1.0), hue, inten * 0.62);
-    fragColor = vec4(clamp(outc, 0.0, 1.0), 1.0);
+    if (uDark > 0.5) {
+        // DARK-BG output: keep the native additive rays on black. Composited
+        // with mix-blend-mode: screen, the black falls away and the coloured
+        // rays glow over the dark hero — the effect's intended look.
+        fragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
+    } else {
+        // LIGHT-BG output: turn additive rays-on-black into tinted-white so the
+        // effect reads as soft colored rays over a LIGHT hero (composited with
+        // mix-blend-mode: multiply). White where there's no ray, hue where there is.
+        float inten = clamp(max(max(col.r, col.g), col.b), 0.0, 1.0);
+        vec3 hue = col / max(inten, 1e-4);
+        vec3 outc = mix(vec3(1.0), hue, inten * 0.62);
+        fragColor = vec4(clamp(outc, 0.0, 1.0), 1.0);
+    }
 }`;
 
 const hexToRgb01 = (hex: string): [number, number, number] => {
@@ -319,9 +327,20 @@ export default function PrismaticBurst({
         uGradient: { value: gradientTex },
         uNoiseAmount: { value: 0.8 },
         uRayCount: { value: 0 },
+        uDark: { value: document.documentElement.getAttribute("data-theme") === "dark" ? 1 : 0 },
       },
     });
     programRef.current = program;
+
+    // Track light/dark so the shader picks the right output mode live (the CSS
+    // also swaps the canvas blend to screen in dark — see globals.css).
+    const syncTheme = () => {
+      const dark = document.documentElement.getAttribute("data-theme") === "dark";
+      program.uniforms.uDark.value = dark ? 1 : 0;
+      if (lowPower) renderStatic();
+    };
+    const themeObserver = new MutationObserver(syncTheme);
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
     const triangle = new Triangle(gl);
     const mesh = new Mesh(gl, { geometry: triangle, program });
@@ -406,6 +425,7 @@ export default function PrismaticBurst({
       container.removeEventListener("pointermove", onPointer);
       ro.disconnect();
       io.disconnect();
+      themeObserver.disconnect();
       try {
         container.removeChild(gl.canvas);
       } catch {

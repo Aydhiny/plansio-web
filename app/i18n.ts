@@ -55,10 +55,10 @@ const en = {
   },
   marquee: { marketing: "marketing", design: "design", software: "software", games: "games" },
   lab: {
-    kicker: "Built in real time · WebGL",
-    title: "we build",
-    accent: "in three dimensions.",
-    lead: "A live Three.js scene — noise-displaced geometry, a fresnel rim in our gradient, and a constellation that leans toward your cursor. Rendered on your GPU, right now.",
+    kicker: "Interactive · real-time",
+    title: "the web doesn't have to",
+    accent: "sit still.",
+    lead: "We build interactive, real-time experiences — not just pages. Everything here is rendering live on your device and reacting to you, in the browser. It's the same craft we bring to the products and brands we ship.",
     hint: "move your cursor",
   },
   services: {
@@ -215,10 +215,10 @@ const bs: Dict = {
   },
   marquee: { marketing: "marketing", design: "dizajn", software: "softver", games: "igre" },
   lab: {
-    kicker: "Uživo · WebGL",
-    title: "gradimo u",
-    accent: "tri dimenzije.",
-    lead: "Živa Three.js scena — geometrija izobličena šumom, fresnel rub u našem gradijentu i sazviježđe koje se naginje ka vašem kursoru. Renderovano na vašem GPU-u, upravo sada.",
+    kicker: "Interaktivno · u realnom vremenu",
+    title: "web ne mora",
+    accent: "mirovati.",
+    lead: "Gradimo interaktivna iskustva u realnom vremenu — ne samo stranice. Sve ovdje se renderuje uživo na vašem uređaju i reaguje na vas, u browseru. To je isti zanat koji ugrađujemo u proizvode i brendove koje isporučujemo.",
     hint: "pomjeri kursor",
   },
   services: {

@@ -965,28 +965,50 @@ section.products{border-top:1px solid var(--line)}
   --glow-warm: 0 0 60px -10px rgba(243,104,68,.6);
 }
 
-/* atmosphere — swap the white washes for deep-space gradients */
+/* --- atmosphere: swap the white washes for deep-space gradients --- */
 :root[data-theme="dark"] .atmos{background:
   radial-gradient(ellipse 90% 55% at 88% -10%,rgba(247,150,90,.10),transparent 60%),
-  radial-gradient(ellipse 92% 66% at 4% 110%,rgba(140,95,235,.14),transparent 62%),
-  radial-gradient(ellipse 70% 50% at 92% 104%,rgba(198,80,214,.08),transparent 64%),
+  radial-gradient(ellipse 92% 66% at 4% 110%,rgba(140,95,235,.16),transparent 62%),
+  radial-gradient(ellipse 70% 50% at 92% 104%,rgba(198,80,214,.10),transparent 64%),
   linear-gradient(178deg,#0b0910 0%,#0d0b14 46%,#0a0810 100%)}
-/* vapor multiply → screen so the coloured blobs glow instead of vanish */
-:root[data-theme="dark"] #vapor{mix-blend-mode:screen;opacity:.5}
-/* grid reads off --line already; nudge visibility + mask */
-:root[data-theme="dark"] .gridlines{opacity:.5}
-/* grain: multiply crushes to black on dark — soft-light keeps the texture */
-:root[data-theme="dark"] .grain{mix-blend-mode:soft-light;opacity:.5}
+:root[data-theme="dark"] #vapor{mix-blend-mode:screen;opacity:.55}      /* multiply → screen so blobs glow */
+:root[data-theme="dark"] .gridlines{opacity:.45}
+:root[data-theme="dark"] .grain{mix-blend-mode:soft-light;opacity:.5}    /* multiply crushes to black on dark */
 
-/* hero prismatic burst: multiply is invisible on dark → screen as soft rays */
-:root[data-theme="dark"] .hero-burst canvas{mix-blend-mode:screen !important;opacity:.45}
+/* --- the fixed white gutter frame around the page → deep void --- */
+:root[data-theme="dark"] .pg-white{box-shadow:0 0 0 100vmax #0b0910}
 
-/* theme toggle button (nav) */
-.theme-toggle{display:inline-grid;place-items:center;width:38px;height:38px;flex:0 0 auto;
-  border:1px solid var(--line);border-radius:11px;background:var(--panel);color:var(--ink);cursor:pointer;
-  transition:border-color .2s var(--ease),transform .2s var(--ease),background .2s var(--ease)}
-.theme-toggle:hover{border-color:var(--line-2);transform:translateY(-1px)}
-.theme-toggle svg{width:18px;height:18px}
+/* --- hero: rays + fade + palms all assume a white page --- */
+:root[data-theme="dark"] .hero-burst canvas{mix-blend-mode:screen !important;opacity:.7}
+:root[data-theme="dark"] .hero-fade{background:linear-gradient(to bottom,
+  transparent 0%,rgba(11,9,16,.35) 42%,rgba(11,9,16,.8) 72%,var(--void) 90%)}
+:root[data-theme="dark"] .giant{text-shadow:0 1px 0 rgba(0,0,0,.4),0 0 60px rgba(140,110,235,.28)}
+:root[data-theme="dark"] .palm-img{mix-blend-mode:screen;filter:blur(.4px) saturate(.9) brightness(.9);opacity:.5}
+
+/* --- surfaces hardcoded to white in the light design --- */
+:root[data-theme="dark"] .nav-menu{background:rgba(11,9,16,.92)}
+:root[data-theme="dark"] .tier{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  box-shadow:0 22px 50px -38px rgba(0,0,0,.6)}
+:root[data-theme="dark"] .pcard,
+:root[data-theme="dark"] .chat-panel,
+:root[data-theme="dark"] .chat-head,
+:root[data-theme="dark"] .chat-teaser,
+:root[data-theme="dark"] .chat-fab{background:var(--panel)}
+:root[data-theme="dark"] .consent{background:rgba(22,19,31,.92)}
+:root[data-theme="dark"] .contact input,
+:root[data-theme="dark"] .contact textarea,
+:root[data-theme="dark"] .chat-input input{background:rgba(255,255,255,.04)}
+:root[data-theme="dark"] .btn.ghost{background:rgba(255,255,255,.04)}
+:root[data-theme="dark"] .btn.ghost:hover{background:rgba(243,104,68,.12)}
+:root[data-theme="dark"] .lab-stage{background:
+  radial-gradient(ellipse 60% 60% at 50% 45%,color-mix(in srgb,var(--c-violet) 22%,transparent),transparent 70%)}
+
+/* ---- theme toggle: borderless icon button, matches the nav's flag switcher ---- */
+.theme-toggle{display:inline-grid;place-items:center;width:26px;height:26px;flex:0 0 auto;padding:0;
+  border:none;background:none;color:var(--ink-70);cursor:url('/assets/mac-cursor.png') 3 1, auto;
+  transition:color .25s var(--ease),transform .25s var(--ease)}
+.theme-toggle:hover{color:var(--ink);transform:translateY(-1px)}
+.theme-toggle svg{width:19px;height:19px}
 .theme-toggle .icon-sun{display:none}
 .theme-toggle .icon-moon{display:block}
 :root[data-theme="dark"] .theme-toggle .icon-sun{display:block}

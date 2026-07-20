@@ -97,7 +97,9 @@ void main(){
   p.y += cos(t + position.x * 3.0) * 0.06;
   vec4 mv = modelViewMatrix * vec4(p, 1.0);
   gl_Position = projectionMatrix * mv;
-  gl_PointSize = uSize * aScale * (300.0 / -mv.z);
+  // clamp so a point that drifts near the camera plane can't blow up into a
+  // full-height sprite at the screen edge
+  gl_PointSize = clamp(uSize * aScale * (300.0 / -mv.z), 0.0, 22.0);
   vA = aScale;
 }`;
 
@@ -128,15 +130,20 @@ export default function Scene3D() {
       window.matchMedia("(pointer: coarse)").matches ||
       (navigator.hardwareConcurrency || 8) <= 4;
 
+    // Opaque canvas with a themed clear colour — NOT alpha:true. Transparent
+    // WebGL compositing is unreliable across browsers/GPUs (it renders white in
+    // some), so we paint the scene's own background to match the page instead.
     let renderer: THREE.WebGLRenderer;
     try {
-      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: !lowPower, powerPreference: "high-performance" });
+      renderer = new THREE.WebGLRenderer({ alpha: false, antialias: !lowPower, powerPreference: "high-performance" });
     } catch {
-      return; // no WebGL → leave the themed background visible
+      return; // no WebGL → leave the themed background (CSS) visible
     }
     const dpr = Math.min(window.devicePixelRatio || 1, lowPower ? 1 : 1.6);
     renderer.setPixelRatio(dpr);
-    renderer.setClearColor(0x000000, 0);
+    const isDark = () => document.documentElement.getAttribute("data-theme") === "dark";
+    const applyBg = () => renderer.setClearColor(isDark() ? 0x0b0910 : 0xf4f2fb, 1);
+    applyBg();
     renderer.domElement.style.width = "100%";
     renderer.domElement.style.height = "100%";
     renderer.domElement.style.display = "block";
@@ -145,8 +152,6 @@ export default function Scene3D() {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
     camera.position.z = 4.2;
-
-    const isDark = () => document.documentElement.getAttribute("data-theme") === "dark";
 
     // ---- the blob ----
     const geo = new THREE.IcosahedronGeometry(1.25, lowPower ? 24 : 48);
@@ -201,8 +206,10 @@ export default function Scene3D() {
 
     // ---- theme reactivity ----
     const themeObserver = new MutationObserver(() => {
+      applyBg();
       mat.uniforms.uDark.value = isDark() ? 1 : 0;
       dotsMat.uniforms.uColor.value.set(...hexToVec3(isDark() ? "#b79cff" : "#8fb8ff"));
+      if (lowPower) renderOnce();
     });
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
