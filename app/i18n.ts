@@ -42,6 +42,13 @@ const en = {
     work: "See the work",
   },
   marquee: { marketing: "marketing", design: "design", software: "software", games: "games" },
+  lab: {
+    kicker: "Built in real time · WebGL",
+    title: "we build",
+    accent: "in three dimensions.",
+    lead: "A live Three.js scene — noise-displaced geometry, a fresnel rim in our gradient, and a constellation that leans toward your cursor. Rendered on your GPU, right now.",
+    hint: "move your cursor",
+  },
   services: {
     h1: "one studio,",
     h2: "the whole stack.",
@@ -183,6 +190,13 @@ const bs: Dict = {
     work: "Pogledaj radove",
   },
   marquee: { marketing: "marketing", design: "dizajn", software: "softver", games: "igre" },
+  lab: {
+    kicker: "Uživo · WebGL",
+    title: "gradimo u",
+    accent: "tri dimenzije.",
+    lead: "Živa Three.js scena — geometrija izobličena šumom, fresnel rub u našem gradijentu i sazviježđe koje se naginje ka vašem kursoru. Renderovano na vašem GPU-u, upravo sada.",
+    hint: "pomjeri kursor",
+  },
   services: {
     h1: "jedan studio,",
     h2: "cijeli stack.",

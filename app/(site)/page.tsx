@@ -3,6 +3,7 @@ import BigMarquee from "@/app/components/BigMarquee";
 import Services from "@/app/components/Services";
 import Showcase from "@/app/components/Showcase";
 import FeaturedProducts from "@/app/components/FeaturedProducts";
+import Lab from "@/app/components/Lab";
 import Manifesto from "@/app/components/Manifesto";
 import Pricing from "@/app/components/Pricing";
 import CTA from "@/app/components/CTA";
@@ -21,6 +22,7 @@ export default async function Home() {
       <Services d={d} />
       <FeaturedProducts d={d} locale={locale} products={products.filter((p) => p.featured)} />
       <Showcase d={d} />
+      <Lab kicker={d.lab.kicker} title={d.lab.title} accent={d.lab.accent} lead={d.lab.lead} hint={d.lab.hint} />
       <Manifesto d={d} />
       <Pricing d={d} />
       <CTA d={d} email={settings.brand.email} />
