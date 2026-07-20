@@ -6,7 +6,16 @@ export const defaultLocale: Locale = "en";
 export const LOCALE_COOKIE = "NEXT_LOCALE";
 
 const en = {
-  nav: { work: "Work", studio: "Studio", pricing: "Pricing", products: "Products", start: "Start a project", open: "Open menu", close: "Close menu" },
+  nav: { work: "Work", studio: "Studio", pricing: "Pricing", products: "Products", blog: "Blog", projects: "Projects", start: "Start a project", open: "Open menu", close: "Close menu", theme: "Toggle theme" },
+  blog: {
+    title: "notes from the",
+    accent: "studio.",
+    lead: "Essays on craft, engineering and the small decisions that make software feel human.",
+    back: "All articles",
+    related: "Keep reading",
+    min: "min read",
+    read: "Read article",
+  },
   products: {
     title: "things we've",
     accent: "shipped.",
@@ -138,7 +147,16 @@ const en = {
 export type Dict = typeof en;
 
 const bs: Dict = {
-  nav: { work: "Radovi", studio: "Studio", pricing: "Cijene", products: "Proizvodi", start: "Započni projekt", open: "Otvori meni", close: "Zatvori meni" },
+  nav: { work: "Radovi", studio: "Studio", pricing: "Cijene", products: "Proizvodi", blog: "Blog", projects: "Projekti", start: "Započni projekt", open: "Otvori meni", close: "Zatvori meni", theme: "Promijeni temu" },
+  blog: {
+    title: "bilješke iz",
+    accent: "studija.",
+    lead: "Eseji o zanatu, inženjeringu i malim odlukama zbog kojih softver djeluje ljudski.",
+    back: "Svi članci",
+    related: "Nastavi čitati",
+    min: "min čitanja",
+    read: "Pročitaj članak",
+  },
   products: {
     title: "stvari koje smo",
     accent: "napravili.",

@@ -9,7 +9,7 @@ export default function Nav({ d, locale, brand = "Plansio" }: { d: Dict; locale:
   const links = [
     { href: "/#work", label: d.nav.work },
     { href: "/products", label: d.nav.products },
-    { href: "/#studio", label: d.nav.studio },
+    { href: "/blog", label: d.nav.blog },
     { href: "/#pricing", label: d.nav.pricing },
   ];
 

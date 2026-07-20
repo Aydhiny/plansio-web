@@ -11,6 +11,7 @@ import CommandPalette from "@/app/components/CommandPalette";
 import { getDict, getLocale } from "@/app/i18n";
 import { getSettings } from "@/lib/studio";
 import { getAllProducts, t } from "@/lib/products";
+import { getAllPosts } from "@/lib/blog";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -26,7 +27,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   const locale = await getLocale();
   const dict = getDict(locale);
   const settings = await getSettings();
-  const products = await getAllProducts();
+  const [products, posts] = await Promise.all([getAllProducts(), getAllPosts()]);
 
   const orgJsonLd = {
     "@context": "https://schema.org",
@@ -47,11 +48,13 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   const paletteItems = [
     { label: dict.nav.work, href: "/#work" },
     { label: dict.nav.products, href: "/products" },
+    { label: dict.nav.blog, href: "/blog" },
     { label: dict.nav.studio, href: "/#studio" },
     { label: dict.nav.pricing, href: "/#pricing" },
     { label: dict.nav.start, href: "/#contact" },
     { label: "FAQ", href: "/faq" },
     ...products.map((p) => ({ label: p.name, href: `/products/${p.slug}`, hint: t(p.category, locale) })),
+    ...posts.map((p) => ({ label: t(p.title, locale), href: `/blog/${p.slug}`, hint: t(p.category, locale) })),
     { label: "Studio", href: "/studio", hint: "admin" },
   ];
 
