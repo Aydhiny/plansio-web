@@ -3,30 +3,38 @@
 import { useEffect, useState } from "react";
 import type { SiteSettings, ThemeConfig } from "@/lib/studio";
 import type { Product } from "@/lib/products";
+import type { Post } from "@/lib/blog";
 import ThemePanel from "./panels/ThemePanel";
 import BrandPanel from "./panels/BrandPanel";
 import ProductsPanel from "./panels/ProductsPanel";
+import PostsPanel from "./panels/PostsPanel";
 
-type Tab = "theme" | "brand" | "products";
+type Tab = "theme" | "brand" | "products" | "blog";
 const TABS: { id: Tab; label: string }[] = [
   { id: "theme", label: "Theme" },
   { id: "brand", label: "Brand & Copy" },
   { id: "products", label: "Products" },
+  { id: "blog", label: "Blog" },
 ];
 
 export default function StudioApp({
   initialSettings,
   initialProducts,
+  initialPosts,
   defaultSettings,
   defaultProducts,
+  defaultPosts,
 }: {
   initialSettings: SiteSettings;
   initialProducts: Product[];
+  initialPosts: Post[];
   defaultSettings: SiteSettings;
   defaultProducts: Product[];
+  defaultPosts: Post[];
 }) {
   const [settings, setSettings] = useState<SiteSettings>(initialSettings);
   const [products, setProducts] = useState<Product[]>(initialProducts);
+  const [posts, setPosts] = useState<Post[]>(initialPosts);
   const [tab, setTab] = useState<Tab>("theme");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -71,6 +79,10 @@ export default function StudioApp({
     setProducts(v);
     setDirty(true);
   };
+  const onPosts = (v: Post[]) => {
+    setPosts(v);
+    setDirty(true);
+  };
 
   const save = async () => {
     setSaving(true);
@@ -78,7 +90,7 @@ export default function StudioApp({
     const res = await fetch("/api/studio/save", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ settings, products }),
+      body: JSON.stringify({ settings, products, posts }),
     });
     setSaving(false);
     if (res.ok) {
@@ -97,6 +109,7 @@ export default function StudioApp({
     if (!confirm("Reset all content and theme back to the built-in defaults? (Save afterwards to apply.)")) return;
     setSettings(defaultSettings);
     setProducts(defaultProducts);
+    setPosts(defaultPosts);
     setDirty(true);
   };
 
@@ -142,6 +155,7 @@ export default function StudioApp({
         {tab === "theme" && <ThemePanel value={settings.theme} onChange={onTheme} />}
         {tab === "brand" && <BrandPanel value={settings} onChange={onSettings} />}
         {tab === "products" && <ProductsPanel value={products} onChange={onProducts} />}
+        {tab === "blog" && <PostsPanel value={posts} onChange={onPosts} />}
       </main>
     </div>
   );
