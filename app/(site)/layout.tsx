@@ -49,13 +49,16 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   const paletteItems = [
     { label: dict.nav.work, href: "/#work" },
     { label: dict.nav.products, href: "/products" },
+    { label: dict.nav.game, href: "/hunter-mouse-2", hint: "game" },
     { label: dict.nav.projects, href: "/projects" },
     { label: dict.nav.blog, href: "/blog" },
     { label: dict.nav.studio, href: "/#studio" },
     { label: dict.nav.pricing, href: "/#pricing" },
     { label: dict.nav.start, href: "/#contact" },
     { label: "FAQ", href: "/faq" },
-    ...products.map((p) => ({ label: p.name, href: `/products/${p.slug}`, hint: t(p.category, locale) })),
+    ...products
+      .filter((p) => p.slug !== "hunter-mouse-2")
+      .map((p) => ({ label: p.name, href: `/products/${p.slug}`, hint: t(p.category, locale) })),
     ...projects.map((p) => ({ label: p.client, href: `/projects/${p.slug}`, hint: t(p.sector, locale) })),
     ...posts.map((p) => ({ label: t(p.title, locale), href: `/blog/${p.slug}`, hint: t(p.category, locale) })),
     { label: "Studio", href: "/studio", hint: "admin" },

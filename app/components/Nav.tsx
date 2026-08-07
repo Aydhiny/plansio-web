@@ -7,9 +7,10 @@ import ThemeToggle from "./ThemeToggle";
 
 export default function Nav({ d, locale, brand = "Plansio" }: { d: Dict; locale: Locale; brand?: string }) {
   const [open, setOpen] = useState(false);
-  const links = [
+  const links: { href: string; label: string; cls?: string }[] = [
     { href: "/#work", label: d.nav.work },
     { href: "/products", label: d.nav.products },
+    { href: "/hunter-mouse-2", label: d.nav.game, cls: "nav-game" },
     { href: "/projects", label: d.nav.projects },
     { href: "/blog", label: d.nav.blog },
     { href: "/#pricing", label: d.nav.pricing },
@@ -40,7 +41,7 @@ export default function Nav({ d, locale, brand = "Plansio" }: { d: Dict; locale:
 
       <div className="nav-r">
         {links.map((l) => (
-          <a key={l.href} href={l.href}>
+          <a key={l.href} href={l.href} className={l.cls}>
             {l.label}
           </a>
         ))}
@@ -69,6 +70,7 @@ export default function Nav({ d, locale, brand = "Plansio" }: { d: Dict; locale:
             <a
               key={l.href}
               href={l.href}
+              className={l.cls}
               style={{ transitionDelay: `${0.06 * i + 0.05}s` }}
               onClick={() => setOpen(false)}
             >

@@ -4,8 +4,10 @@ import type { Dict, Locale } from "../i18n";
 
 export default function ProductCard({ p, d, locale }: { p: Product; d: Dict; locale: Locale }) {
   const statusLabel = p.status === "live" ? d.products.live : p.status === "beta" ? d.products.beta : d.products.wip;
+  // Hunter Mouse 2 has its own bespoke, cinematic page; every card links straight there.
+  const href = p.slug === "hunter-mouse-2" ? "/hunter-mouse-2" : `/products/${p.slug}`;
   return (
-    <Link href={`/products/${p.slug}`} className="pcard" style={{ "--accent": p.accent } as React.CSSProperties}>
+    <Link href={href} className="pcard" style={{ "--accent": p.accent } as React.CSSProperties}>
       <div className="pcard-media">
         {p.poster ? (
           // eslint-disable-next-line @next/next/no-img-element

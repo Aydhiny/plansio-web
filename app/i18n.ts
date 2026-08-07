@@ -6,7 +6,7 @@ export const defaultLocale: Locale = "en";
 export const LOCALE_COOKIE = "NEXT_LOCALE";
 
 const en = {
-  nav: { work: "Work", studio: "Studio", pricing: "Pricing", products: "Products", blog: "Blog", projects: "Projects", start: "Start a project", open: "Open menu", close: "Close menu", theme: "Toggle theme" },
+  nav: { work: "Work", studio: "Studio", pricing: "Pricing", products: "Products", blog: "Blog", projects: "Projects", game: "Hunter Mouse 2", start: "Start a project", open: "Open menu", close: "Close menu", theme: "Toggle theme" },
   blog: {
     title: "notes from the",
     accent: "studio.",
@@ -166,7 +166,7 @@ const en = {
 export type Dict = typeof en;
 
 const bs: Dict = {
-  nav: { work: "Radovi", studio: "Studio", pricing: "Cijene", products: "Proizvodi", blog: "Blog", projects: "Projekti", start: "Započni projekt", open: "Otvori meni", close: "Zatvori meni", theme: "Promijeni temu" },
+  nav: { work: "Radovi", studio: "Studio", pricing: "Cijene", products: "Proizvodi", blog: "Blog", projects: "Projekti", game: "Hunter Mouse 2", start: "Započni projekt", open: "Otvori meni", close: "Zatvori meni", theme: "Promijeni temu" },
   blog: {
     title: "bilješke iz",
     accent: "studija.",

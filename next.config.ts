@@ -42,6 +42,11 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+  async redirects() {
+    // Hunter Mouse 2 now lives on its own dedicated, cinematic route. Keep the
+    // old product URL working (and consolidate SEO) with a permanent redirect.
+    return [{ source: "/products/hunter-mouse-2", destination: "/hunter-mouse-2", permanent: true }];
+  },
 };
 
 export default nextConfig;

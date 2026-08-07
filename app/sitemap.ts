@@ -11,14 +11,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: SITE_URL, lastModified: now, changeFrequency: "monthly", priority: 1 },
     { url: `${SITE_URL}/products`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${SITE_URL}/hunter-mouse-2`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE_URL}/projects`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE_URL}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    ...products.map((p) => ({
-      url: `${SITE_URL}/products/${p.slug}`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    })),
+    ...products
+      .filter((p) => p.slug !== "hunter-mouse-2") // has its own dedicated route above
+      .map((p) => ({
+        url: `${SITE_URL}/products/${p.slug}`,
+        lastModified: now,
+        changeFrequency: "monthly" as const,
+        priority: 0.8,
+      })),
     ...projects.map((p) => ({
       url: `${SITE_URL}/projects/${p.slug}`,
       lastModified: now,
