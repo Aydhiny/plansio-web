@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import type { Dict, Locale } from "../i18n";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Nav({ d, locale, brand = "Plansio" }: { d: Dict; locale: Locale; brand?: string }) {
   const [open, setOpen] = useState(false);
+  const [onDark, setOnDark] = useState(false);
+  const pathname = usePathname();
   const links: { href: string; label: string; cls?: string }[] = [
     { href: "/#work", label: d.nav.work },
     { href: "/products", label: d.nav.products },
@@ -29,8 +32,54 @@ export default function Nav({ d, locale, brand = "Plansio" }: { d: Dict; locale:
     };
   }, [open]);
 
+  /*
+   * Colour-aware nav: sections that render dark under the fixed nav opt in with
+   * `data-nav-dark`. We sample the nav's own vertical midline each frame the
+   * user scrolls; if a dark section spans that line, the nav switches its text
+   * + controls to light. Re-collected on route change (content may render late).
+   */
+  useEffect(() => {
+    let sections = Array.from(document.querySelectorAll<HTMLElement>("[data-nav-dark]"));
+    const nav = document.getElementById("nav");
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const r = nav?.getBoundingClientRect();
+      const y = r ? r.top + r.height / 2 : 48;
+      let dark = false;
+      for (const s of sections) {
+        const b = s.getBoundingClientRect();
+        if (b.top <= y && b.bottom >= y) {
+          dark = true;
+          break;
+        }
+      }
+      setOnDark(dark);
+    };
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    const recollect = () => {
+      sections = Array.from(document.querySelectorAll<HTMLElement>("[data-nav-dark]"));
+      update();
+    };
+    recollect();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    // content can mount slightly after route change — re-sample a couple of times
+    const t1 = setTimeout(recollect, 80);
+    const t2 = setTimeout(recollect, 400);
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (raf) cancelAnimationFrame(raf);
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [pathname]);
+
   return (
-    <nav className="nav" id="nav">
+    <nav className={`nav${onDark && !open ? " nav-on-dark" : ""}`} id="nav">
       <a className="brand" href="/" onClick={() => setOpen(false)}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/assets/plansio-logo.png" alt="" />
