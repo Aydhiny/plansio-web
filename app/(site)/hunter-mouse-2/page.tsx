@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import HeroAurora from "@/app/components/HeroAurora";
+import HeroLogo from "@/app/components/HeroLogo";
+import Parallax from "@/app/components/Parallax";
+import PrismaticBurst from "@/app/components/PrismaticBurst";
 import VideoEmbed from "@/app/components/VideoEmbed";
 import { getDict, getLocale } from "@/app/i18n";
 
@@ -86,11 +89,11 @@ export default async function HunterMouse2() {
   };
 
   return (
-    <main className="hm" style={{ "--accent": "#a24bff" } as React.CSSProperties}>
+    <main className="hm" data-nav-dark style={{ "--accent": "#a24bff" } as React.CSSProperties}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* ============================== HERO ============================== */}
-      <header className="hm-hero" data-nav-dark>
+      <header className="hm-hero">
         <div className="hm-hero-bg" aria-hidden="true">
           <HeroAurora />
         </div>
@@ -98,9 +101,7 @@ export default async function HunterMouse2() {
         <div className="hm-hero-fade" aria-hidden="true" />
 
         <div className="hm-hero-inner wrap">
-          <span className="hm-kick">{h.kicker}</span>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="hm-keyart" src={`${IMG}/keyart-header.webp`} alt="Hunter Mouse 2" />
+          <HeroLogo src={`${IMG}/keyart-header.webp`} alt="Hunter Mouse 2" />
           <p className="hm-hero-sub">{h.heroSub}</p>
           <div className="hm-hero-cta">
             <a className="btn solid" href={GAMEJOLT} target="_blank" rel="noreferrer">
@@ -113,14 +114,6 @@ export default async function HunterMouse2() {
               <YouTubeIcon /> <span>{h.devlogs}</span>
             </a>
           </div>
-          <div className="hm-hero-meta">
-            {h.meta.map((m, i) => (
-              <span key={i}>
-                {i > 0 && <i />}
-                {m}
-              </span>
-            ))}
-          </div>
         </div>
 
         <a className="hm-scroll" href="#story" aria-label={h.scrollAria}>
@@ -129,7 +122,10 @@ export default async function HunterMouse2() {
       </header>
 
       {/* ============================== PREMISE (dark band) ============== */}
-      <section className="hm-story" id="story" data-nav-dark style={{ backgroundImage: `url(${IMG}/reufs-keep.webp)` }}>
+      <section className="hm-story" id="story">
+        <Parallax className="hm-story-bg" speed={0.3}>
+          <div className="hm-story-img" style={{ backgroundImage: `url(${IMG}/reufs-keep.webp)` }} />
+        </Parallax>
         <div className="hm-story-scrim" aria-hidden="true" />
         <div className="wrap hm-story-inner">
           <span className="hm-eyebrow">{h.storyEyebrow}</span>
@@ -310,7 +306,17 @@ export default async function HunterMouse2() {
       </section>
 
       {/* ============================== FINAL CTA ======================= */}
-      <section className="hm-final" data-nav-dark style={{ backgroundImage: `url(${IMG}/infernias-keep.webp)` }}>
+      <section className="hm-final">
+        <div className="hm-final-burst" aria-hidden="true">
+          <PrismaticBurst
+            intensity={1.05}
+            speed={0.4}
+            animationType="hover"
+            rayCount={9}
+            mixBlendMode="screen"
+            colors={["#a24bff", "#d93d72", "#6a22d8", "#4f7bff", "#f36844"]}
+          />
+        </div>
         <div className="hm-final-scrim" aria-hidden="true" />
         <div className="wrap hm-final-inner">
           <h2 className="hm-final-h">

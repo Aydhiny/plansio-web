@@ -1,5 +1,6 @@
 import type { Dict } from "../i18n";
 import type { SiteSettings } from "@/lib/studio";
+import Parallax from "./Parallax";
 
 export default function Footer({ d, settings }: { d: Dict; settings?: SiteSettings }) {
   const f = d.footer;
@@ -8,52 +9,55 @@ export default function Footer({ d, settings }: { d: Dict; settings?: SiteSettin
   const social = settings?.social;
   const studioHrefs = ["/#work", "/#studio", "/#pricing", "/#contact"];
   const serviceHrefs = ["/#work", "/#work", "/#work", "/#work"];
-  const connectHrefs = [
-    social?.instagram || "#",
-    social?.linkedin || "#",
-    social?.dribbble || "#",
-    `mailto:${email}`,
-  ];
+  const connectHrefs = [social?.instagram || "#", social?.linkedin || "#", social?.dribbble || "#", `mailto:${email}`];
+
   return (
-    <footer className="footer">
+    <footer className="footer" data-nav-dark>
       <div className="wrap">
-        <div className="fgrid">
-          <div className="fbrand">
-            <div className="wm">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/plansio-logo.png" alt="" />
-              {brand}
+        <div className="foot-top">
+          <div className="foot-lead">
+            <h2 className="foot-head">
+              {d.cta.hPre} <span className="serif grad-t">{d.cta.hAccent}</span>
+            </h2>
+            <a className="btn solid foot-cta" href="/#contact">
+              <span>{d.nav.start}</span> <span className="ar">↗</span>
+            </a>
+          </div>
+
+          <div className="foot-cols">
+            <div className="fcol">
+              <h4>{f.studio}</h4>
+              {f.lStudio.map((label, i) => (
+                <a key={label} href={studioHrefs[i]}>
+                  {label}
+                </a>
+              ))}
             </div>
-            <p>{f.blurb}</p>
-          </div>
-          <div className="fcol">
-            <h4>{f.studio}</h4>
-            {f.lStudio.map((label, i) => (
-              <a key={label} href={studioHrefs[i]}>
-                {label}
-              </a>
-            ))}
-          </div>
-          <div className="fcol">
-            <h4>{f.services}</h4>
-            {f.lServices.map((label, i) => (
-              <a key={label} href={serviceHrefs[i]}>
-                {label}
-              </a>
-            ))}
-          </div>
-          <div className="fcol">
-            <h4>{f.connect}</h4>
-            {f.lConnect.map((label, i) => (
-              <a key={label} href={connectHrefs[i]}>
-                {label}
-              </a>
-            ))}
+            <div className="fcol">
+              <h4>{f.services}</h4>
+              {f.lServices.map((label, i) => (
+                <a key={label} href={serviceHrefs[i]}>
+                  {label}
+                </a>
+              ))}
+            </div>
+            <div className="fcol">
+              <h4>{f.connect}</h4>
+              {f.lConnect.map((label, i) => (
+                <a key={label} href={connectHrefs[i]}>
+                  {label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
-        <div className="fword parallax" data-speed="0.05">
+
+        <p className="foot-blurb">{f.blurb}</p>
+
+        <Parallax className="fword" speed={0.12}>
           {brand}
-        </div>
+        </Parallax>
+
         <div className="fbot">
           <span>{f.rights}</span>
           <span className="fbot-links">

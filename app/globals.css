@@ -477,26 +477,38 @@ html.js .hero.in .logo3d-wrap{opacity:1;transform:none}
 .form-err{font-size:.9rem;color:#c0392b;text-align:center}
 .cta-alt{font-size:.9rem;color:var(--ink-45)}
 .cta-alt a{color:var(--c-coral);text-decoration:underline;text-underline-offset:3px}
-.footer{border-top:1px solid var(--line);padding:64px 0 40px}
-.fgrid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:30px;margin-bottom:54px}
-@media(max-width:780px){.fgrid{grid-template-columns:1fr 1fr}}
-.fbrand .wm{font-family:var(--font-display),sans-serif;font-weight:700;font-size:2rem;letter-spacing:-.03em;
-  display:flex;align-items:center;gap:11px}
-.fbrand .wm img{width:34px}
-.fbrand p{color:var(--ink-70);max-width:30ch;margin-top:14px;font-size:.96rem;line-height:1.55}
+/* Large, unapologetic, dark footer — a bold anchor on every page. Scopes the
+   dark palette to itself so token-driven children read light-on-dark. */
+.footer{position:relative;overflow:hidden;color:var(--ink);
+  --ink:#f5f2fb;--ink-70:#c6c0d8;--ink-45:#8b85a1;--line:rgba(255,255,255,.12);
+  background:
+    radial-gradient(80% 60% at 88% -6%,rgba(162,75,255,.18),transparent 60%),
+    radial-gradient(70% 60% at 4% 24%,rgba(217,61,114,.13),transparent 60%),
+    linear-gradient(180deg,#0b0714 0%,#080511 100%);
+  border-top:1px solid rgba(255,255,255,.1);padding:clamp(66px,10vh,128px) 0 34px}
+.foot-top{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(30px,5vw,72px);align-items:start}
+@media(max-width:820px){.foot-top{grid-template-columns:1fr;gap:46px}}
+.foot-head{font-family:var(--font-display),sans-serif;font-weight:800;letter-spacing:-.045em;line-height:.96;
+  font-size:clamp(2.5rem,6.2vw,5.6rem);max-width:15ch;color:#fff;text-wrap:balance}
+.foot-head .serif{font-weight:500;display:inline}
+.foot-cta{margin-top:clamp(26px,3.4vh,40px)}
+.foot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:520px){.foot-cols{grid-template-columns:1fr 1fr}}
 .fcol h4{font-family:var(--font-mono),monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink-45);margin-bottom:16px}
-.fcol a{display:block;color:var(--ink-70);font-size:.96rem;margin-bottom:11px;transition:color .25s}
-.fcol a:hover{color:var(--ink)}
-/* Full-bleed to the viewport (escaping .wrap's padding) and sized so the word
-   always fits inside the neon frame — the old 21vw overflowed and clipped the
-   trailing "o" against the white gutter. */
-.fword{font-family:var(--font-display),sans-serif;font-weight:700;letter-spacing:-.03em;font-size:clamp(2.6rem,14vw,12.5rem);
-  line-height:1;margin-top:24px;user-select:none;white-space:nowrap;text-align:center;
-  width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:.06em .14em;overflow:hidden;
-  background:var(--grad-warm-v);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.92}
-.fbot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:24px;
-  border-top:1px solid var(--line);font-family:var(--font-mono),monospace;font-size:.74rem;letter-spacing:.06em;
+  color:var(--ink-45);margin-bottom:18px}
+.fcol a{display:block;color:var(--ink-70);font-size:1.04rem;margin-bottom:13px;width:max-content;
+  transition:color .25s var(--ease),transform .25s var(--ease)}
+.fcol a:hover{color:#fff;transform:translateX(5px)}
+.foot-blurb{color:var(--ink-70);max-width:46ch;margin-top:clamp(42px,6vh,72px);font-size:1.02rem;line-height:1.6}
+/* the giant wordmark — full-bleed, parallax, bleeding confidence */
+.fword{font-family:var(--font-display),sans-serif;font-weight:800;letter-spacing:-.045em;
+  font-size:clamp(4.2rem,21vw,18rem);line-height:.8;margin-top:clamp(6px,2vh,22px);
+  user-select:none;white-space:nowrap;text-align:center;overflow:hidden;
+  width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:.06em .1em;
+  background:linear-gradient(176deg,rgba(255,255,255,.92) 0%,rgba(178,120,255,.62) 55%,rgba(217,61,114,.34) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.fbot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;margin-top:clamp(6px,2vh,18px);
+  border-top:1px solid rgba(255,255,255,.1);font-family:var(--font-mono),monospace;font-size:.74rem;letter-spacing:.06em;
   color:var(--ink-45)}
 
 /* ============================== REVEAL ============================== */
@@ -1093,7 +1105,19 @@ section.products{border-top:1px solid var(--line)}
    Namespaced `.hm-*`. Token-driven so it adapts to dark mode; the two
    full-bleed screenshot bands (story + final CTA) are dark in both themes.
    ============================================================ */
-.hm{position:relative;z-index:1}
+/* This page is a cohesive DARK cinematic experience regardless of site theme:
+   we scope the dark token palette + a continuous gradient backdrop to .hm, so
+   every token-driven section renders dark and the sections connect through one
+   flowing background instead of hard light/dark seams. */
+.hm{position:relative;z-index:1;color-scheme:dark;color:var(--ink);
+  --ink:#f5f2fb;--ink-70:#c6c0d8;--ink-45:#8b85a1;
+  --line:rgba(255,255,255,.10);--line-2:rgba(255,255,255,.22);
+  --panel:#171226;--void:#0a0713;--void-2:#120d20;
+  background:
+    radial-gradient(120% 55% at 86% 3%,rgba(162,75,255,.18),transparent 55%),
+    radial-gradient(90% 48% at 6% 26%,rgba(60,139,255,.13),transparent 60%),
+    radial-gradient(110% 55% at 62% 101%,rgba(217,61,114,.16),transparent 60%),
+    linear-gradient(180deg,#0a0713 0%,#110b20 28%,#0c0818 62%,#0a0713 100%)}
 .grad-t-warm{background:var(--grad-warm-v);-webkit-background-clip:text;background-clip:text;color:transparent}
 
 /* shared section chrome */
@@ -1118,36 +1142,35 @@ section.products{border-top:1px solid var(--line)}
 .hm-hero-fade{position:absolute;left:0;right:0;bottom:0;height:38%;z-index:1;pointer-events:none;
   background:linear-gradient(to bottom,transparent 0%,rgba(11,6,22,.55) 60%,#0b0616 100%)}
 .hm-hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center}
-.hm-kick{font-family:var(--font-mono),monospace;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;
-  color:rgba(255,255,255,.72)}
-.hm-keyart{width:min(760px,86vw);height:auto;margin:clamp(18px,3vh,32px) 0 0;
-  border-radius:20px;border:1px solid rgba(255,255,255,.14);
-  box-shadow:0 44px 100px -44px rgba(140,60,240,.75),0 0 0 1px rgba(255,255,255,.04);
-  animation:hmFloat 7s var(--ease) infinite}
-@keyframes hmFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@media(prefers-reduced-motion:reduce){.hm-keyart{animation:none}}
-.hm-hero-sub{margin-top:clamp(22px,3.4vh,34px);max-width:56ch;color:rgba(255,255,255,.84);
-  font-size:clamp(1.02rem,1.5vw,1.28rem);line-height:1.6}
-.hm-hero-cta{display:flex;gap:12px;margin-top:clamp(26px,3.4vh,38px);flex-wrap:wrap;justify-content:center}
+/* HUGE logo, pointer-tilted in 3D */
+.hm-keyart-wrap{width:min(1180px,94vw);perspective:1400px;animation:hmFloat 8s var(--ease) infinite}
+.hm-keyart{display:block;width:100%;height:auto;transform-style:preserve-3d;will-change:transform;
+  filter:drop-shadow(0 60px 90px rgba(120,40,230,.55)) drop-shadow(0 0 60px rgba(217,61,114,.3))}
+@keyframes hmFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@media(prefers-reduced-motion:reduce){.hm-keyart-wrap{animation:none}}
+.hm-hero-sub{margin-top:clamp(24px,3.6vh,38px);max-width:min(56ch,100%);color:rgba(255,255,255,.84);
+  font-size:clamp(1.05rem,1.5vw,1.32rem);line-height:1.6}
+.hm-hero-cta{display:flex;gap:12px;margin-top:clamp(26px,3.4vh,38px);flex-wrap:wrap;justify-content:center;max-width:100%}
+@media(max-width:640px){.hm-keyart-wrap{width:100%}}
 .hm-hero-cta .btn.ghost{color:#fff;border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.06);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .hm-hero-cta .btn.ghost:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.5)}
-.hm-hero-meta{display:flex;align-items:center;gap:0;margin-top:clamp(22px,3vh,32px);flex-wrap:wrap;justify-content:center;
-  font-family:var(--font-mono),monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.52)}
-.hm-hero-meta span{display:inline-flex;align-items:center;gap:14px}
-.hm-hero-meta i{width:4px;height:4px;border-radius:50%;background:var(--c-pink);opacity:.85;margin:0 14px}
 .hm-scroll{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3;
   width:24px;height:38px;border:2px solid rgba(255,255,255,.4);border-radius:14px;display:grid;justify-items:center;padding-top:6px}
 .hm-scroll span{width:3px;height:8px;border-radius:3px;background:#fff;animation:hmScroll 1.6s var(--ease) infinite}
 @keyframes hmScroll{0%{opacity:0;transform:translateY(-4px)}40%{opacity:1}80%,100%{opacity:0;transform:translateY(10px)}}
 @media(max-width:600px){.hm-scroll{display:none}}
 
+/* ------------------------------- PARALLAX layer -------------------- */
+.hm-parallax{transform:translate3d(0,var(--py,0),0);will-change:transform}
+
 /* ------------------------------- STORY (dark band) ------------------ */
-.hm-story{position:relative;overflow:hidden;padding:clamp(90px,16vh,190px) 0;
-  background-size:cover;background-position:center;background-repeat:no-repeat}
+.hm-story{position:relative;overflow:hidden;padding:clamp(96px,17vh,200px) 0}
+.hm-story-bg{position:absolute;inset:-16% 0;z-index:0}
+.hm-story-img{position:absolute;inset:0;background-size:cover;background-position:center}
 .hm-story-scrim{position:absolute;inset:0;z-index:0;
-  background:linear-gradient(180deg,rgba(9,7,16,.72),rgba(9,7,16,.62) 45%,rgba(9,7,16,.9)),
-    radial-gradient(70% 90% at 15% 30%,rgba(184,31,196,.35),transparent 60%)}
+  background:linear-gradient(180deg,#0a0713 0%,rgba(9,7,16,.66) 22%,rgba(9,7,16,.52) 45%,rgba(9,7,16,.82) 82%,#0a0713 100%),
+    radial-gradient(70% 90% at 15% 30%,rgba(184,31,196,.32),transparent 60%)}
 .hm-story-inner{position:relative;z-index:1;max-width:900px}
 .hm-story-inner .hm-eyebrow{color:var(--c-warm)}
 .hm-story-h{font-family:var(--font-display),sans-serif;font-weight:800;letter-spacing:-.035em;line-height:1.05;
@@ -1191,8 +1214,8 @@ section.products{border-top:1px solid var(--line)}
 .hm-features{padding:clamp(60px,9vh,120px) 0;border-top:1px solid var(--line)}
 .hm-feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:clamp(14px,1.6vw,20px)}
 .hm-feat{position:relative;padding:26px 24px 28px;border-radius:18px;border:1px solid var(--line);
-  background:linear-gradient(160deg,rgba(255,255,255,.7),rgba(255,255,255,.4));
-  box-shadow:0 20px 46px -40px rgba(20,18,28,.4);transition:transform .5s var(--ease),border-color .5s,box-shadow .5s}
+  background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  box-shadow:0 24px 50px -40px rgba(0,0,0,.6);transition:transform .5s var(--ease),border-color .5s,box-shadow .5s}
 .hm-feat:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--accent) 45%,var(--line));
   box-shadow:0 34px 64px -44px color-mix(in srgb,var(--accent) 50%,transparent)}
 .hm-feat-icon{font-size:1.7rem;line-height:1;display:block}
@@ -1266,16 +1289,21 @@ section.products{border-top:1px solid var(--line)}
   color:var(--ink-45)}
 .hm-devcard-ch svg{color:#ff0033}
 
-/* ------------------------------- FINAL CTA (dark band) -------------- */
-.hm-final{position:relative;overflow:hidden;padding:clamp(90px,16vh,200px) 0;text-align:center;
-  background-size:cover;background-position:center}
-.hm-final-scrim{position:absolute;inset:0;z-index:0;
-  background:linear-gradient(180deg,rgba(9,7,16,.66),rgba(9,7,16,.8)),
-    radial-gradient(60% 70% at 50% 40%,rgba(247,104,68,.28),transparent 62%)}
-.hm-final-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+/* ------------------------------- FINAL CTA (interactive WebGL) ------ */
+.hm-final{position:relative;overflow:hidden;padding:clamp(110px,19vh,230px) 0;text-align:center;
+  background:radial-gradient(130% 100% at 50% 0%,#1b0d36 0%,#0a0713 68%)}
+.hm-final-burst{position:absolute;inset:0;z-index:0;opacity:.7}
+.hm-final-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(46% 56% at 50% 48%,rgba(10,7,19,.8) 0%,rgba(10,7,19,.42) 62%,transparent 100%),
+    linear-gradient(180deg,#0a0713 0%,transparent 24%,transparent 76%,#0a0713 100%)}
+.hm-final-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
 .hm-final-h{font-family:var(--font-display),sans-serif;font-weight:800;letter-spacing:-.04em;line-height:.98;
   font-size:clamp(2.4rem,7vw,5.6rem);color:#fff;text-wrap:balance}
-.hm-final-inner>p{color:rgba(255,255,255,.82);font-size:clamp(1.05rem,1.5vw,1.28rem);max-width:48ch;margin:18px 0 34px;line-height:1.55}
+.hm-final-inner>p{color:rgba(255,255,255,.9);font-size:clamp(1.05rem,1.5vw,1.28rem);max-width:48ch;margin:18px 0 34px;line-height:1.55;
+  text-shadow:0 2px 18px rgba(0,0,0,.6)}
+.hm-final-inner .hm-final-h{text-shadow:0 4px 30px rgba(0,0,0,.4)}
+.hm-final-cta .btn.ghost{color:#fff;border-color:rgba(255,255,255,.32);background:rgba(10,7,19,.35);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .hm-final-cta{display:flex;gap:13px;flex-wrap:wrap;justify-content:center;align-items:center}
 .hm-final-back{font-family:var(--font-mono),monospace;font-size:.78rem;letter-spacing:.04em;color:rgba(255,255,255,.75);
   padding:.5em 0;transition:color .25s;width:100%;margin-top:6px}
@@ -1300,16 +1328,6 @@ section.products{border-top:1px solid var(--line)}
 .nav.nav-on-dark .nav-burger span{background:#fff}
 .nav.nav-on-dark .nav-game{filter:brightness(1.12)}
 .nav.nav-on-dark .lang .flag{outline-color:rgba(255,255,255,.25)}
-
-/* ------------------------------- dark-mode nudges ------------------- */
-:root[data-theme="dark"] .hm-hero-glow{background:radial-gradient(60% 50% at 50% 82%,rgba(11,9,16,.5),transparent 70%)}
-:root[data-theme="dark"] .hm-hero-fade{background:linear-gradient(to bottom,
-  transparent 0%,rgba(11,9,16,.35) 40%,rgba(11,9,16,.85) 74%,var(--void) 96%)}
-:root[data-theme="dark"] .hm-kick,
-:root[data-theme="dark"] .hm-hero-cta .btn.ghost{background:rgba(22,19,31,.5)}
-:root[data-theme="dark"] .hm-hero-sub{text-shadow:0 1px 12px rgba(0,0,0,.6)}
-:root[data-theme="dark"] .hm-title{text-shadow:0 2px 0 rgba(0,0,0,.4),0 0 70px rgba(140,110,235,.4)}
-:root[data-theme="dark"] .hm-feat{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02))}
 
 @media(prefers-reduced-motion:reduce){
   .hm-scroll span,.hm-track-eq i{animation:none!important}
