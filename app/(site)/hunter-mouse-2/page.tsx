@@ -94,14 +94,13 @@ export default async function HunterMouse2() {
 
       {/* ============================== HERO ============================== */}
       <header className="hm-hero">
-        <div className="hm-hero-bg" aria-hidden="true">
+        <HeroLogo src={`${IMG}/keyart-header.webp`} alt="Hunter Mouse 2 key art" />
+        <div className="hm-hero-aurora" aria-hidden="true">
           <HeroAurora />
         </div>
-        <div className="hm-hero-glow" aria-hidden="true" />
-        <div className="hm-hero-fade" aria-hidden="true" />
+        <div className="hm-hero-scrim" aria-hidden="true" />
 
         <div className="hm-hero-inner wrap">
-          <HeroLogo src={`${IMG}/keyart-header.webp`} alt="Hunter Mouse 2" />
           <p className="hm-hero-sub">{h.heroSub}</p>
           <div className="hm-hero-cta">
             <a className="btn solid" href={GAMEJOLT} target="_blank" rel="noreferrer">
@@ -115,10 +114,6 @@ export default async function HunterMouse2() {
             </a>
           </div>
         </div>
-
-        <a className="hm-scroll" href="#story" aria-label={h.scrollAria}>
-          <span />
-        </a>
       </header>
 
       {/* ============================== PREMISE (dark band) ============== */}
@@ -309,11 +304,12 @@ export default async function HunterMouse2() {
       <section className="hm-final">
         <div className="hm-final-burst" aria-hidden="true">
           <PrismaticBurst
-            intensity={1.05}
+            intensity={0.62}
             speed={0.4}
             animationType="hover"
-            rayCount={9}
+            rayCount={10}
             mixBlendMode="screen"
+            forceDark
             colors={["#a24bff", "#d93d72", "#6a22d8", "#4f7bff", "#f36844"]}
           />
         </div>

@@ -230,6 +230,10 @@ interface PrismaticBurstProps {
   hoverDampness?: number;
   rayCount?: number;
   mixBlendMode?: string;
+  /* Force the dark (additive-on-black) output regardless of the site theme —
+     for sections that are ALWAYS dark, so the effect doesn't render its light
+     (tinted-white) output and wash out under a screen/lighten blend. */
+  forceDark?: boolean;
 }
 
 export default function PrismaticBurst({
@@ -243,6 +247,7 @@ export default function PrismaticBurst({
   hoverDampness = 0,
   rayCount,
   mixBlendMode = "lighten",
+  forceDark = false,
 }: PrismaticBurstProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -327,7 +332,7 @@ export default function PrismaticBurst({
         uGradient: { value: gradientTex },
         uNoiseAmount: { value: 0.8 },
         uRayCount: { value: 0 },
-        uDark: { value: document.documentElement.getAttribute("data-theme") === "dark" ? 1 : 0 },
+        uDark: { value: forceDark || document.documentElement.getAttribute("data-theme") === "dark" ? 1 : 0 },
       },
     });
     programRef.current = program;
@@ -336,7 +341,7 @@ export default function PrismaticBurst({
     // also swaps the canvas blend to screen in dark — see globals.css).
     const syncTheme = () => {
       const dark = document.documentElement.getAttribute("data-theme") === "dark";
-      program.uniforms.uDark.value = dark ? 1 : 0;
+      program.uniforms.uDark.value = forceDark || dark ? 1 : 0;
       if (lowPower) renderStatic();
     };
     const themeObserver = new MutationObserver(syncTheme);

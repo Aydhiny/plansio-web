@@ -1131,35 +1131,39 @@ section.products{border-top:1px solid var(--line)}
 .hm-sec-h .serif{font-weight:500;display:inline}
 .hm-sec-lead{max-width:44ch;color:var(--ink-70);font-size:1.05rem;line-height:1.6}
 
-/* ------------------------------- HERO (dark · Aurora) --------------- */
-.hm-hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;
-  overflow:hidden;isolation:isolate;padding:clamp(118px,19vh,200px) 0 clamp(70px,12vh,130px);
-  background:radial-gradient(120% 92% at 50% 6%,#271552 0%,#160a2e 44%,#0b0616 100%)}
-.hm-hero-bg{position:absolute;inset:0;z-index:0}
+/* ------------------------------- HERO (immersive full-bleed art) ---- */
+.hm-hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+  overflow:hidden;isolation:isolate;padding:clamp(120px,18vh,200px) 0 clamp(54px,8vh,100px);background:#0a0713}
+/* the official key-art fills the hero as an immersive backdrop (base scale keeps
+   the cover over-filling so the pointer tilt never reveals an edge) */
+.hm-keyart-wrap{position:absolute;inset:0;z-index:0;perspective:1600px}
+.hm-keyart{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 42%;
+  transform:scale(1.08);transform-style:preserve-3d;will-change:transform;animation:hmDrift 28s ease-in-out infinite}
+@keyframes hmDrift{0%,100%{object-position:50% 39%}50%{object-position:50% 48%}}
+@media(prefers-reduced-motion:reduce){.hm-keyart{animation:none}}
+/* the key-art is a wide banner — on tall/narrow screens `cover` would slice the
+   logo, so fit the whole thing to width and let the dark hero fill around it */
+@media(max-width:720px){.hm-keyart{object-fit:contain;object-position:50% 30%;transform:scale(1);animation:none}}
+/* neon aurora sky, masked to the top, screen-blended over the art for motion */
+.hm-hero-aurora{position:absolute;inset:0;z-index:1;mix-blend-mode:screen;opacity:.55;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 24%,transparent 58%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 24%,transparent 58%)}
 .hm-aurora{position:absolute;inset:0;width:100%;height:100%}
-.hm-hero-glow{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:radial-gradient(58% 48% at 50% 40%,rgba(162,75,255,.24),transparent 72%)}
-.hm-hero-fade{position:absolute;left:0;right:0;bottom:0;height:38%;z-index:1;pointer-events:none;
-  background:linear-gradient(to bottom,transparent 0%,rgba(11,6,22,.55) 60%,#0b0616 100%)}
-.hm-hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center}
-/* HUGE logo, pointer-tilted in 3D */
-.hm-keyart-wrap{width:min(1180px,94vw);perspective:1400px;animation:hmFloat 8s var(--ease) infinite}
-.hm-keyart{display:block;width:100%;height:auto;transform-style:preserve-3d;will-change:transform;
-  filter:drop-shadow(0 60px 90px rgba(120,40,230,.55)) drop-shadow(0 0 60px rgba(217,61,114,.3))}
-@keyframes hmFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-@media(prefers-reduced-motion:reduce){.hm-keyart-wrap{animation:none}}
-.hm-hero-sub{margin-top:clamp(24px,3.6vh,38px);max-width:min(56ch,100%);color:rgba(255,255,255,.84);
-  font-size:clamp(1.05rem,1.5vw,1.32rem);line-height:1.6}
-.hm-hero-cta{display:flex;gap:12px;margin-top:clamp(26px,3.4vh,38px);flex-wrap:wrap;justify-content:center;max-width:100%}
-@media(max-width:640px){.hm-keyart-wrap{width:100%}}
-.hm-hero-cta .btn.ghost{color:#fff;border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.06);
+/* darkens the top (light nav legibility) + bottom (copy) — art stays bright mid-frame */
+.hm-hero-scrim{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    linear-gradient(to bottom,rgba(10,7,19,.9) 0%,rgba(10,7,19,.32) 11%,transparent 28%,
+      transparent 44%,rgba(10,7,19,.5) 66%,rgba(10,7,19,.9) 88%,#0a0713 100%),
+    radial-gradient(140% 62% at 50% 40%,transparent 52%,rgba(10,7,19,.4) 100%)}
+.hm-hero-inner{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center}
+/* bold statement tagline — display type, not body copy */
+.hm-hero-sub{max-width:min(48ch,100%);color:#fff;font-family:var(--font-display),sans-serif;font-weight:600;
+  font-size:clamp(1.3rem,2.7vw,2.2rem);letter-spacing:-.02em;line-height:1.26;text-wrap:balance;
+  text-shadow:0 4px 34px rgba(0,0,0,.65)}
+.hm-hero-cta{display:flex;gap:12px;margin-top:clamp(26px,3.4vh,40px);flex-wrap:wrap;justify-content:center;max-width:100%}
+.hm-hero-cta .btn.ghost{color:#fff;border-color:rgba(255,255,255,.34);background:rgba(10,7,19,.32);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.hm-hero-cta .btn.ghost:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.5)}
-.hm-scroll{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3;
-  width:24px;height:38px;border:2px solid rgba(255,255,255,.4);border-radius:14px;display:grid;justify-items:center;padding-top:6px}
-.hm-scroll span{width:3px;height:8px;border-radius:3px;background:#fff;animation:hmScroll 1.6s var(--ease) infinite}
-@keyframes hmScroll{0%{opacity:0;transform:translateY(-4px)}40%{opacity:1}80%,100%{opacity:0;transform:translateY(10px)}}
-@media(max-width:600px){.hm-scroll{display:none}}
+.hm-hero-cta .btn.ghost:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.6)}
 
 /* ------------------------------- PARALLAX layer -------------------- */
 .hm-parallax{transform:translate3d(0,var(--py,0),0);will-change:transform}
@@ -1292,10 +1296,10 @@ section.products{border-top:1px solid var(--line)}
 /* ------------------------------- FINAL CTA (interactive WebGL) ------ */
 .hm-final{position:relative;overflow:hidden;padding:clamp(110px,19vh,230px) 0;text-align:center;
   background:radial-gradient(130% 100% at 50% 0%,#1b0d36 0%,#0a0713 68%)}
-.hm-final-burst{position:absolute;inset:0;z-index:0;opacity:.7}
+.hm-final-burst{position:absolute;inset:0;z-index:0;opacity:.5}
 .hm-final-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:radial-gradient(46% 56% at 50% 48%,rgba(10,7,19,.8) 0%,rgba(10,7,19,.42) 62%,transparent 100%),
-    linear-gradient(180deg,#0a0713 0%,transparent 24%,transparent 76%,#0a0713 100%)}
+  background:radial-gradient(52% 62% at 50% 47%,rgba(10,7,19,.92) 0%,rgba(10,7,19,.55) 52%,transparent 100%),
+    linear-gradient(180deg,#0a0713 0%,transparent 26%,transparent 74%,#0a0713 100%)}
 .hm-final-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
 .hm-final-h{font-family:var(--font-display),sans-serif;font-weight:800;letter-spacing:-.04em;line-height:.98;
   font-size:clamp(2.4rem,7vw,5.6rem);color:#fff;text-wrap:balance}
