@@ -1141,19 +1141,18 @@ section.products{border-top:1px solid var(--line)}
   mask-image:radial-gradient(85% 72% at 50% 46%,#000,transparent 80%)}
 .hm-aurora{position:absolute;inset:0;width:100%;height:100%}
 .hm-hero-glow{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:radial-gradient(60% 44% at 50% 45%,rgba(162,75,255,.2),transparent 72%)}
-/* the key-art as a full-WIDTH band: displayed at/below its native size, so it's
-   downscaled (crisp) — NEVER stretched to cover, which upscaled + blurred it */
-.hm-keyart-wrap{position:relative;z-index:2;width:100%;perspective:1700px;line-height:0}
+  background:radial-gradient(58% 46% at 50% 42%,rgba(162,75,255,.24),transparent 72%)}
+/* the REAL transparent game logo — huge, floating over the aurora, subtle 3D
+   tilt. It's a ~square PNG shown well below native width, so it stays crisp. */
+.hm-keyart-wrap{position:relative;z-index:2;width:min(720px,86vw);perspective:1700px;line-height:0}
 .hm-keyart{display:block;width:100%;height:auto;transform-style:preserve-3d;will-change:transform;
-  filter:drop-shadow(0 42px 66px rgba(90,25,190,.5))}
+  filter:drop-shadow(0 24px 50px rgba(110,35,210,.55))}
 @media(prefers-reduced-motion:reduce){.hm-keyart{transform:none!important}}
-.hm-hero-inner{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center;
-  margin-top:clamp(24px,4.5vh,54px)}
+.hm-hero-inner{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center}
 /* bold statement tagline — display type, not body copy */
-.hm-hero-sub{max-width:min(46ch,100%);color:#fff;font-family:var(--font-display),sans-serif;font-weight:600;
-  font-size:clamp(1.26rem,2.5vw,2.05rem);letter-spacing:-.02em;line-height:1.28;text-wrap:balance;
-  text-shadow:0 4px 30px rgba(0,0,0,.6)}
+.hm-hero-sub{max-width:min(46ch,100%);margin-top:clamp(14px,2.4vh,30px);color:#fff;
+  font-family:var(--font-display),sans-serif;font-weight:600;font-size:clamp(1.2rem,2.3vw,1.92rem);
+  letter-spacing:-.02em;line-height:1.3;text-wrap:balance;text-shadow:0 4px 30px rgba(0,0,0,.5)}
 .hm-hero-cta{display:flex;gap:12px;margin-top:clamp(24px,3.2vh,36px);flex-wrap:wrap;justify-content:center;max-width:100%}
 .hm-hero-cta .btn.ghost{color:#fff;border-color:rgba(255,255,255,.34);background:rgba(10,7,19,.32);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}

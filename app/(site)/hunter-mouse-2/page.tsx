@@ -98,9 +98,9 @@ export default async function HunterMouse2() {
           <HeroAurora />
         </div>
         <div className="hm-hero-glow" aria-hidden="true" />
-        <HeroLogo src={`${IMG}/keyart-header.webp`} alt="Hunter Mouse 2 key art" />
 
         <div className="hm-hero-inner wrap">
+          <HeroLogo src={`${IMG}/hm2-logo.webp`} alt="Hunter Mouse 2" />
           <p className="hm-hero-sub">{h.heroSub}</p>
           <div className="hm-hero-cta">
             <a className="btn solid" href={GAMEJOLT} target="_blank" rel="noreferrer">
