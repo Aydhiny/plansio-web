@@ -1131,36 +1131,30 @@ section.products{border-top:1px solid var(--line)}
 .hm-sec-h .serif{font-weight:500;display:inline}
 .hm-sec-lead{max-width:44ch;color:var(--ink-70);font-size:1.05rem;line-height:1.6}
 
-/* ------------------------------- HERO (immersive full-bleed art) ---- */
-.hm-hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
-  overflow:hidden;isolation:isolate;padding:clamp(120px,18vh,200px) 0 clamp(54px,8vh,100px);background:#0a0713}
-/* the official key-art fills the hero as an immersive backdrop (base scale keeps
-   the cover over-filling so the pointer tilt never reveals an edge) */
-.hm-keyart-wrap{position:absolute;inset:0;z-index:0;perspective:1600px}
-.hm-keyart{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 42%;
-  transform:scale(1.08);transform-style:preserve-3d;will-change:transform;animation:hmDrift 28s ease-in-out infinite}
-@keyframes hmDrift{0%,100%{object-position:50% 39%}50%{object-position:50% 48%}}
-@media(prefers-reduced-motion:reduce){.hm-keyart{animation:none}}
-/* the key-art is a wide banner — on tall/narrow screens `cover` would slice the
-   logo, so fit the whole thing to width and let the dark hero fill around it */
-@media(max-width:720px){.hm-keyart{object-fit:contain;object-position:50% 30%;transform:scale(1);animation:none}}
-/* neon aurora sky, masked to the top, screen-blended over the art for motion */
-.hm-hero-aurora{position:absolute;inset:0;z-index:1;mix-blend-mode:screen;opacity:.55;pointer-events:none;
-  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 24%,transparent 58%);
-  mask-image:linear-gradient(to bottom,#000 0%,#000 24%,transparent 58%)}
+/* ------------------------------- HERO (full-width crisp art band) --- */
+.hm-hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  overflow:hidden;isolation:isolate;padding:clamp(124px,16vh,196px) 0 clamp(58px,9vh,112px);
+  background:radial-gradient(120% 78% at 50% 43%,#1c1039 0%,#0e0922 46%,#0a0713 100%)}
+/* aurora atmosphere behind the art, masked to a soft central pool */
+.hm-hero-aurora{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none;
+  -webkit-mask-image:radial-gradient(85% 72% at 50% 46%,#000,transparent 80%);
+  mask-image:radial-gradient(85% 72% at 50% 46%,#000,transparent 80%)}
 .hm-aurora{position:absolute;inset:0;width:100%;height:100%}
-/* darkens the top (light nav legibility) + bottom (copy) — art stays bright mid-frame */
-.hm-hero-scrim{position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:
-    linear-gradient(to bottom,rgba(10,7,19,.9) 0%,rgba(10,7,19,.32) 11%,transparent 28%,
-      transparent 44%,rgba(10,7,19,.5) 66%,rgba(10,7,19,.9) 88%,#0a0713 100%),
-    radial-gradient(140% 62% at 50% 40%,transparent 52%,rgba(10,7,19,.4) 100%)}
-.hm-hero-inner{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center}
+.hm-hero-glow{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(60% 44% at 50% 45%,rgba(162,75,255,.2),transparent 72%)}
+/* the key-art as a full-WIDTH band: displayed at/below its native size, so it's
+   downscaled (crisp) — NEVER stretched to cover, which upscaled + blurred it */
+.hm-keyart-wrap{position:relative;z-index:2;width:100%;perspective:1700px;line-height:0}
+.hm-keyart{display:block;width:100%;height:auto;transform-style:preserve-3d;will-change:transform;
+  filter:drop-shadow(0 42px 66px rgba(90,25,190,.5))}
+@media(prefers-reduced-motion:reduce){.hm-keyart{transform:none!important}}
+.hm-hero-inner{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center;
+  margin-top:clamp(24px,4.5vh,54px)}
 /* bold statement tagline — display type, not body copy */
-.hm-hero-sub{max-width:min(48ch,100%);color:#fff;font-family:var(--font-display),sans-serif;font-weight:600;
-  font-size:clamp(1.3rem,2.7vw,2.2rem);letter-spacing:-.02em;line-height:1.26;text-wrap:balance;
-  text-shadow:0 4px 34px rgba(0,0,0,.65)}
-.hm-hero-cta{display:flex;gap:12px;margin-top:clamp(26px,3.4vh,40px);flex-wrap:wrap;justify-content:center;max-width:100%}
+.hm-hero-sub{max-width:min(46ch,100%);color:#fff;font-family:var(--font-display),sans-serif;font-weight:600;
+  font-size:clamp(1.26rem,2.5vw,2.05rem);letter-spacing:-.02em;line-height:1.28;text-wrap:balance;
+  text-shadow:0 4px 30px rgba(0,0,0,.6)}
+.hm-hero-cta{display:flex;gap:12px;margin-top:clamp(24px,3.2vh,36px);flex-wrap:wrap;justify-content:center;max-width:100%}
 .hm-hero-cta .btn.ghost{color:#fff;border-color:rgba(255,255,255,.34);background:rgba(10,7,19,.32);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .hm-hero-cta .btn.ghost:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.6)}

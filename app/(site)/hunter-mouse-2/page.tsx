@@ -94,11 +94,11 @@ export default async function HunterMouse2() {
 
       {/* ============================== HERO ============================== */}
       <header className="hm-hero">
-        <HeroLogo src={`${IMG}/keyart-header.webp`} alt="Hunter Mouse 2 key art" />
         <div className="hm-hero-aurora" aria-hidden="true">
           <HeroAurora />
         </div>
-        <div className="hm-hero-scrim" aria-hidden="true" />
+        <div className="hm-hero-glow" aria-hidden="true" />
+        <HeroLogo src={`${IMG}/keyart-header.webp`} alt="Hunter Mouse 2 key art" />
 
         <div className="hm-hero-inner wrap">
           <p className="hm-hero-sub">{h.heroSub}</p>
