@@ -13,7 +13,7 @@ export default function Showcase({ d }: { d: Dict }) {
           <p>{s.lead}</p>
         </div>
         <div className="showcase-media rv d1">
-          <VideoEmbed id="Glwv6vjXREs" title={s.videoTitle} poster="/assets/hunter-mouse-2.jpg" />
+          <VideoEmbed id="Glwv6vjXREs" title={s.videoTitle} />
         </div>
         <div className="showcase-foot rv d1">
           <div className="showcase-meta">

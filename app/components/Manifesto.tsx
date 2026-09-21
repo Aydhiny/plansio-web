@@ -1,7 +1,7 @@
 import type { Dict } from "../i18n";
 import CountUp from "./CountUp";
 
-const STAT_NUMBERS = ["120+", "3", "100%"];
+const STAT_NUMBERS = ["3", "3", "100%"];
 
 export default function Manifesto({ d }: { d: Dict }) {
   const m = d.manifesto;

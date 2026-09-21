@@ -142,7 +142,7 @@ export default async function HunterMouse2() {
             </a>
           </div>
           <div className="hm-trailer-frame rv">
-            <VideoEmbed id={TRAILER_ID} title="Hunter Mouse 2 — trailer" poster={`${IMG}/reufs-keep.webp`} />
+            <VideoEmbed id={TRAILER_ID} title="Hunter Mouse 2 — trailer" />
           </div>
         </div>
       </section>

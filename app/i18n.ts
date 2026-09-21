@@ -165,7 +165,7 @@ const en = {
     d: "human",
     e: " is the work.",
     p: "Anyone can ship a feature. We obsess over the gap between what a product does and how it feels — the warmth, the timing, the small moments that make people trust a brand.",
-    stats: ["Projects shipped", "Disciplines, one team", "In-house craft"],
+    stats: ["Clients", "Disciplines, one team", "In-house craft"],
   },
   pricing: {
     h1: "ways to",
@@ -173,9 +173,9 @@ const en = {
     h2: "together.",
     lead: "Clear engagements, no surprise invoices. Start small or go all-in — every tier is run by the people doing the work.",
     tiers: [
-      { name: "Spark", price: "$2.4k", period: "/ project", for: "A single, focused deliverable — a landing page, a logo, a campaign.", features: ["One discipline, one outcome", "2-week turnaround", "Source files included", "Two revision rounds"], cta: "Start small", badge: "" },
-      { name: "Studio", price: "$6.8k", period: "/ month", for: "A dedicated team across design, marketing & code — your brand on retainer.", features: ["All three disciplines", "Dedicated project lead", "Weekly shipping cadence", "Unlimited revisions", "Priority support"], cta: "Book the studio", badge: "Most picked" },
-      { name: "Scale", price: "Custom", period: "", for: "Full-stack product & brand partnership for teams shipping at volume.", features: ["Multi-project roadmap", "Embedded engineers", "Dedicated infrastructure", "SLA & account team"], cta: "Let's talk scale", badge: "" },
+      { name: "Spark", price: "500 KM", period: "/ project", for: "A single, focused deliverable — a landing page, a logo, a campaign.", features: ["One discipline, one outcome", "2-week turnaround", "Source files included", "Two revision rounds"], cta: "Start small", badge: "" },
+      { name: "Studio", price: "1300 KM", period: "/ month", for: "A dedicated team across design, marketing & code — your brand on retainer.", features: ["All three disciplines", "Dedicated project lead", "Weekly shipping cadence", "Unlimited revisions", "Priority support"], cta: "Book the studio", badge: "Most picked" },
+      { name: "Scale", price: "4500 KM", period: "", for: "Full-stack product & brand partnership for teams shipping at volume.", features: ["Multi-project roadmap", "Embedded engineers", "Dedicated infrastructure", "SLA & account team"], cta: "Let's talk scale", badge: "" },
     ],
   },
   cta: {
@@ -395,7 +395,7 @@ const bs: Dict = {
     d: "ljudski",
     e: " — to je posao.",
     p: "Svako može isporučiti feature. Nas opsjeda jaz između onoga što proizvod radi i kako se osjeća — toplina, tajming, mali trenuci zbog kojih ljudi počnu vjerovati brendu.",
-    stats: ["Isporučenih projekata", "Discipline, jedan tim", "Zanatstvo u kući"],
+    stats: ["Klijenata", "Discipline, jedan tim", "Zanatstvo u kući"],
   },
   pricing: {
     h1: "načini da",
@@ -403,9 +403,9 @@ const bs: Dict = {
     h2: "zajedno.",
     lead: "Jasni angažmani, bez iznenađenja na fakturi. Počni malo ili idi all-in — svaki paket vode ljudi koji rade posao.",
     tiers: [
-      { name: "Spark", price: "$2.4k", period: "/ projekt", for: "Jedan fokusiran deliverable — landing stranica, logo, kampanja.", features: ["Jedna disciplina, jedan ishod", "Rok od 2 sedmice", "Uključeni izvorni fajlovi", "Dva kruga revizija"], cta: "Počni malo", badge: "" },
-      { name: "Studio", price: "$6.8k", period: "/ mjesec", for: "Posvećen tim kroz dizajn, marketing i kod — vaš brend na retaineru.", features: ["Sve tri discipline", "Posvećen vođa projekta", "Sedmični ritam isporuke", "Neograničene revizije", "Prioritetna podrška"], cta: "Rezerviši studio", badge: "Najčešći izbor" },
-      { name: "Scale", price: "Po dogovoru", period: "", for: "Full-stack partnerstvo za proizvod i brend, za timove koji isporučuju u velikom obimu.", features: ["Roadmap za više projekata", "Ugrađeni inženjeri", "Posvećena infrastruktura", "SLA i account tim"], cta: "Razgovarajmo o skaliranju", badge: "" },
+      { name: "Spark", price: "500 KM", period: "/ projekt", for: "Jedan fokusiran deliverable — landing stranica, logo, kampanja.", features: ["Jedna disciplina, jedan ishod", "Rok od 2 sedmice", "Uključeni izvorni fajlovi", "Dva kruga revizija"], cta: "Počni malo", badge: "" },
+      { name: "Studio", price: "1300 KM", period: "/ mjesec", for: "Posvećen tim kroz dizajn, marketing i kod — vaš brend na retaineru.", features: ["Sve tri discipline", "Posvećen vođa projekta", "Sedmični ritam isporuke", "Neograničene revizije", "Prioritetna podrška"], cta: "Rezerviši studio", badge: "Najčešći izbor" },
+      { name: "Scale", price: "4500 KM", period: "", for: "Full-stack partnerstvo za proizvod i brend, za timove koji isporučuju u velikom obimu.", features: ["Roadmap za više projekata", "Ugrađeni inženjeri", "Posvećena infrastruktura", "SLA i account tim"], cta: "Razgovarajmo o skaliranju", badge: "" },
     ],
   },
   cta: {

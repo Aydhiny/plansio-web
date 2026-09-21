@@ -168,7 +168,7 @@ section{position:relative}
 .nav-menu-inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
   gap:20px;padding:0 12vw}
 .nav-menu-inner a:not(.btn){font-family:var(--font-display),sans-serif;font-weight:700;letter-spacing:-.03em;
-  font-size:clamp(2.2rem,11vw,3.6rem);line-height:1;color:var(--ink);width:max-content;
+  font-size:clamp(2.2rem,11vw,3.6rem);line-height:1.05;color:var(--ink);width:max-content;max-width:100%;
   opacity:0;transform:translateY(20px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
 .nav-menu-inner a:not(.btn):last-of-type{margin-bottom:6px}
 .nav-menu-inner .btn{align-self:flex-start;margin-top:12px;
@@ -852,6 +852,16 @@ section.products{border-top:1px solid var(--line)}
 .consent p{font-size:.92rem;line-height:1.5;color:var(--ink-70)}
 .consent-btn{align-self:flex-start}
 @media(max-width:520px){.consent{left:12px;right:12px;max-width:none;bottom:12px}}
+/* short viewports (common laptop window heights): the hero's CTA row sits near
+   the bottom edge, so shrink the banner to a flush bar and reclaim a little
+   vertical room in the hero rather than letting the two overlap. */
+@media(max-height:820px){
+  .stage{padding-bottom:90px}
+  .consent{bottom:10px;left:10px;flex-direction:row;align-items:center;gap:10px;
+    max-width:min(460px,92vw);padding:4px 12px;border-radius:14px}
+  .consent p{font-size:.75rem}
+  .consent-btn{padding:.4em .9em;font-size:.75rem}
+}
 
 /* ---- chat: user bubble + typing ---- */
 .chat-msg.me{align-self:flex-end;background:var(--grad-warm-v);color:#2a1206;border-color:transparent;

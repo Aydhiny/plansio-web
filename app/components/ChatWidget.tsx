@@ -22,8 +22,14 @@ export default function ChatWidget({ d }: { d: ChatDict }) {
 
   useEffect(() => {
     if (open) return;
-    const t = window.setTimeout(() => setTeaser(true), 4200);
-    return () => clearTimeout(t);
+    const show = window.setTimeout(() => setTeaser(true), 4200);
+    // auto-dismiss back to the compact FAB — a teaser that lingers forever
+    // ends up parked on top of page content (CTAs, copy) as people scroll.
+    const hide = window.setTimeout(() => setTeaser(false), 11000);
+    return () => {
+      clearTimeout(show);
+      clearTimeout(hide);
+    };
   }, [open]);
 
   useEffect(() => {

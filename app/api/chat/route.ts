@@ -31,7 +31,7 @@ export async function POST(req: Request) {
 
   const system = `You are the concierge for Plansio, a full-stack studio doing marketing, design, software and games. Voice: warm, concise, confident, no fluff. Reply in ${
     locale === "bs" ? "Bosnian" : "English"
-  } (or mirror the user's language). Help visitors understand the studio and pick the right engagement. Pricing tiers: Spark $2.4k/project (one focused deliverable), Studio $6.8k/month (dedicated team, retainer), Scale custom (full-stack partnership). To start a project, point them to the contact form on the page or hello@plansio.studio. Never invent services, clients, prices or facts beyond these. Keep replies under ~90 words.\n\nOur products:\n${productList}`;
+  } (or mirror the user's language). Help visitors understand the studio and pick the right engagement. Pricing tiers: Spark 500 KM/project (one focused deliverable), Studio 1300 KM/month (dedicated team, retainer), Scale 4500 KM (full-stack partnership). To start a project, point them to the contact form on the page or hello@plansio.studio. Never invent services, clients, prices or facts beyond these. Keep replies under ~90 words.\n\nOur products:\n${productList}`;
 
   try {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
