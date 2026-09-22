@@ -24,7 +24,7 @@ const en = {
     trailerH: "See it in motion.",
     gjPage: "Game Jolt page",
     worldsEyebrow: "The worlds",
-    worldsH: "Eight handcrafted worlds, brimming with secrets.",
+    worldsH: "Twelve handcrafted worlds, brimming with secrets.",
     worldsLead:
       "Every world is modelled, lit and scored by hand — from sun-drenched lagoons to neon fortresses. Here's a look at where the hunt takes you.",
     worlds: [
@@ -36,7 +36,15 @@ const en = {
       { name: "The High Seas", blurb: "Board floating galleons and raise the black flag." },
       { name: "Reuf's Valley", blurb: "A crimson desert guarded by Reuf's Pet — a very large spider." },
       { name: "Reuf's Keep", blurb: "The final neon-soaked approach to the traitor himself." },
+      { name: "Misty Heights", blurb: "A rain-slicked neon skyline where the chase runs straight up the rooftops." },
+      { name: "Starlane", blurb: "Punch through the void on rails, threading rings of light past enemy fire." },
+      { name: "Chase Road", blurb: "Floor it down a sunset highway, smashing through gates and outrunning trouble." },
+      { name: "Smugglers Run", blurb: "A pirate-run dock at golden hour — cutlasses out, cargo on the line." },
     ],
+    hubEyebrow: "The hub",
+    hubH: "Build the only place in the game that's truly yours.",
+    hubBody:
+      "Puntsy's Hollow is a persistent home base you build with your own hands — buy plots, place buildings, and watch them grow through visible upgrade tiers. Every building is a verb: a hangar unlocks the helicopter, a dock opens the smugglers' mission chain. Coins finally have somewhere to go.",
     featEyebrow: "What you'll do",
     featH: "Adventure, nostalgia & danger.",
     features: [
@@ -254,7 +262,7 @@ const bs: Dict = {
     trailerH: "Pogledaj je u pokretu.",
     gjPage: "Game Jolt stranica",
     worldsEyebrow: "Svjetovi",
-    worldsH: "Osam ručno izrađenih svjetova, punih tajni.",
+    worldsH: "Dvanaest ručno izrađenih svjetova, punih tajni.",
     worldsLead:
       "Svaki svijet je ručno modeliran, osvijetljen i uglazbljen — od suncem obasjanih laguna do neonskih tvrđava. Evo gdje te lov vodi.",
     worlds: [
@@ -266,7 +274,15 @@ const bs: Dict = {
       { name: "The High Seas", blurb: "Ukrcaj se na leteće galije i podigni crnu zastavu." },
       { name: "Reuf's Valley", blurb: "Grimizna pustinja koju čuva Reufov ljubimac — poprilično velik pauk." },
       { name: "Reuf's Keep", blurb: "Završni, neonom obliveni put do samog izdajnika." },
+      { name: "Misty Heights", blurb: "Kišom okupan neonski horizont gdje potjera ide pravo uz krovove." },
+      { name: "Starlane", blurb: "Probij se kroz prazninu po šinama, provlačeći se kroz krugove svjetlosti pored neprijateljske vatre." },
+      { name: "Chase Road", blurb: "Pritisni gas niz autoput u sumrak, razbijajući kapije i bježeći od nevolje." },
+      { name: "Smugglers Run", blurb: "Pristanište krijumčara u zlatno doba dana — sablje isukane, teret na kocki." },
     ],
+    hubEyebrow: "Centar",
+    hubH: "Izgradi jedino mjesto u igri koje je zaista tvoje.",
+    hubBody:
+      "Puntsyjeva Jazbina je stalna baza koju gradiš vlastitim rukama — kupuj parcele, postavljaj zgrade i gledaj kako rastu kroz vidljive nivoe nadogradnje. Svaka zgrada je glagol: hangar otključava helikopter, dok otvara lanac misija krijumčara. Novčići konačno imaju gdje otići.",
     featEyebrow: "Šta te čeka",
     featH: "Avantura, nostalgija i opasnost.",
     features: [

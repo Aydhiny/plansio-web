@@ -30,6 +30,10 @@ const WORLD_STRUCT: { img: string; wide?: boolean }[] = [
   { img: "pirate-ship" },
   { img: "reufs-valley" },
   { img: "reufs-keep" },
+  { img: "misty-heights" },
+  { img: "starlane" },
+  { img: "chase-road", wide: true },
+  { img: "smugglers-run" },
 ];
 const FEAT_ICON = ["🗺️", "🎮", "⚡", "👀", "🕵️"];
 const JOURNEY_HREF: (string | undefined)[] = [undefined, MUSIC, undefined, undefined, undefined];
@@ -170,6 +174,19 @@ export default async function HunterMouse2() {
               </figure>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ============================== HUB / HOMESTEAD (dark band) ====== */}
+      <section className="hm-story" id="hub">
+        <Parallax className="hm-story-bg" speed={0.3}>
+          <div className="hm-story-img" style={{ backgroundImage: `url(${IMG}/homestead.webp)` }} />
+        </Parallax>
+        <div className="hm-story-scrim" aria-hidden="true" />
+        <div className="wrap hm-story-inner">
+          <span className="hm-eyebrow">{h.hubEyebrow}</span>
+          <h2 className="hm-story-h">{h.hubH}</h2>
+          <p>{h.hubBody}</p>
         </div>
       </section>
 
