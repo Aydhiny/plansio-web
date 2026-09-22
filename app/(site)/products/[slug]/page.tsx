@@ -89,6 +89,9 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
               />
             ) : ytId ? (
               <VideoEmbed id={ytId} title={p.name} poster={p.poster} />
+            ) : p.poster ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img className="pd-poster" src={p.poster} alt={p.name} loading="lazy" />
             ) : null}
           </div>
 

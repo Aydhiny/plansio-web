@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import HeroAurora from "@/app/components/HeroAurora";
 import HeroLogo from "@/app/components/HeroLogo";
+import HmScroller from "@/app/components/HmScroller";
 import Parallax from "@/app/components/Parallax";
 import PrismaticBurst from "@/app/components/PrismaticBurst";
 import VideoEmbed from "@/app/components/VideoEmbed";
@@ -34,6 +35,13 @@ const WORLD_STRUCT: { img: string; wide?: boolean }[] = [
   { img: "starlane" },
   { img: "chase-road", wide: true },
   { img: "smugglers-run" },
+];
+const GALLERY_IMAGES = [
+  "gallery-archipelago",
+  "gallery-frost-forest",
+  "gallery-desert",
+  "gallery-portal",
+  "gallery-dock",
 ];
 const FEAT_ICON = ["🗺️", "🎮", "⚡", "👀", "🕵️"];
 const JOURNEY_HREF: (string | undefined)[] = [undefined, MUSIC, undefined, undefined, undefined];
@@ -98,6 +106,8 @@ export default async function HunterMouse2() {
 
       {/* ============================== HERO ============================== */}
       <header className="hm-hero">
+        <div className="hm-hero-bg" aria-hidden="true" />
+        <div className="hm-hero-scrim" aria-hidden="true" />
         <div className="hm-hero-aurora" aria-hidden="true">
           <HeroAurora />
         </div>
@@ -187,6 +197,22 @@ export default async function HunterMouse2() {
           <span className="hm-eyebrow">{h.hubEyebrow}</span>
           <h2 className="hm-story-h">{h.hubH}</h2>
           <p>{h.hubBody}</p>
+        </div>
+      </section>
+
+      {/* ============================== GALLERY (scroller) =============== */}
+      <section className="hm-gallery">
+        <div className="wrap">
+          <div className="hm-sec-head">
+            <div>
+              <span className="hm-eyebrow">{h.galleryEyebrow}</span>
+              <h2 className="hm-sec-h">{h.galleryH}</h2>
+            </div>
+            <p className="hm-sec-lead">{h.galleryLead}</p>
+          </div>
+          <HmScroller
+            images={GALLERY_IMAGES.map((slug) => ({ src: `${IMG}/${slug}.webp`, alt: "Hunter Mouse 2 — in-game screenshot" }))}
+          />
         </div>
       </section>
 

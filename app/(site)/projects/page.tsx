@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import ProjectCard from "@/app/components/ProjectCard";
 import { getDict, getLocale } from "@/app/i18n";
 import { getAllProjects } from "@/lib/projects";
@@ -23,13 +24,22 @@ export default async function ProjectsPage() {
             </h2>
             <p>{d.projects.lead}</p>
           </div>
-          <div className="prgrid">
-            {projects.map((p) => (
-              <div className="rv" key={p.slug}>
-                <ProjectCard p={p} locale={locale} />
-              </div>
-            ))}
-          </div>
+          {projects.length > 0 ? (
+            <div className="prgrid">
+              {projects.map((p) => (
+                <div className="rv" key={p.slug}>
+                  <ProjectCard p={p} locale={locale} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="empty-state rv">
+              <p>{d.projects.empty}</p>
+              <Link className="btn ghost" href="/products">
+                <span>{d.projects.emptyCta}</span> <span className="ar">↗</span>
+              </Link>
+            </div>
+          )}
         </div>
       </section>
     </main>

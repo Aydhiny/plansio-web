@@ -10,7 +10,7 @@ const en = {
   hm: {
     kicker: "A Plansio original · 3D collectathon platformer",
     heroSub:
-      "Enter Jungle Scapes, where worlds impress and adventure awaits. Chase the thunderbolts, stop the greatest betrayal in mouse history — are you mouse enough?",
+      "Twelve handcrafted worlds. A home base that's truly yours. One mouse standing between Reuf and total betrayal. Chase the thunderbolts and prove it — are you mouse enough?",
     play: "Play on Game Jolt",
     watch: "Watch the trailer",
     devlogs: "Devlogs",
@@ -45,6 +45,9 @@ const en = {
     hubH: "Build the only place in the game that's truly yours.",
     hubBody:
       "Puntsy's Hollow is a persistent home base you build with your own hands — buy plots, place buildings, and watch them grow through visible upgrade tiers. Every building is a verb: a hangar unlocks the helicopter, a dock opens the smugglers' mission chain. Coins finally have somewhere to go.",
+    galleryEyebrow: "More looks",
+    galleryH: "Drag through the archive.",
+    galleryLead: "A few more corners of the kingdom — straight from the dev build.",
     featEyebrow: "What you'll do",
     featH: "Adventure, nostalgia & danger.",
     features: [
@@ -116,6 +119,8 @@ const en = {
     title: "work we've done for",
     accent: "clients.",
     lead: "Selected case studies — the brief, the build and what changed for the client afterwards.",
+    empty: "First case studies are in progress — check back soon, or see what we've shipped for ourselves in the meantime.",
+    emptyCta: "See our products",
     back: "All projects",
     challenge: "The challenge",
     approach: "Our approach",
@@ -248,7 +253,7 @@ const bs: Dict = {
   hm: {
     kicker: "Plansio originalna igra · 3D kolektaton platformer",
     heroSub:
-      "Uđi u Jungle Scapes, gdje svjetovi oduševljavaju, a avantura čeka. Jurcaj za munjama, zaustavi najveću izdaju u historiji miševa — jesi li dovoljno miš?",
+      "Dvanaest ručno izrađenih svjetova. Dom koji je zaista tvoj. Jedan miš stoji između Reufa i potpune izdaje. Jurcaj za munjama i dokaži to — jesi li dovoljno miš?",
     play: "Igraj na Game Joltu",
     watch: "Pogledaj trailer",
     devlogs: "Devlogovi",
@@ -283,6 +288,9 @@ const bs: Dict = {
     hubH: "Izgradi jedino mjesto u igri koje je zaista tvoje.",
     hubBody:
       "Puntsyjeva Jazbina je stalna baza koju gradiš vlastitim rukama — kupuj parcele, postavljaj zgrade i gledaj kako rastu kroz vidljive nivoe nadogradnje. Svaka zgrada je glagol: hangar otključava helikopter, dok otvara lanac misija krijumčara. Novčići konačno imaju gdje otići.",
+    galleryEyebrow: "Još pogleda",
+    galleryH: "Prevuci kroz arhivu.",
+    galleryLead: "Još nekoliko kutaka kraljevstva — direktno iz razvojne verzije.",
     featEyebrow: "Šta te čeka",
     featH: "Avantura, nostalgija i opasnost.",
     features: [
@@ -354,6 +362,8 @@ const bs: Dict = {
     title: "radovi koje smo napravili za",
     accent: "klijente.",
     lead: "Odabrane studije slučaja — zadatak, izrada i ono što se za klijenta promijenilo nakon toga.",
+    empty: "Prve studije slučaja su u pripremi — navratite uskoro, ili u međuvremenu pogledajte šta smo napravili sami za sebe.",
+    emptyCta: "Pogledaj naše proizvode",
     back: "Svi projekti",
     challenge: "Izazov",
     approach: "Naš pristup",
