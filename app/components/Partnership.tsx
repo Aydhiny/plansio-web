@@ -20,6 +20,7 @@ export default function Partnership({ d }: { d: Dict }) {
     <section className="partner" data-screen-label="Partnership">
       <div className="wrap">
         <div className="shead rv">
+          <span className="kick">{p.eyebrow}</span>
           <h2>
             {p.h1} <span className="serif grad-t">{p.hAccent}</span>
           </h2>
@@ -44,6 +45,9 @@ export default function Partnership({ d }: { d: Dict }) {
           </div>
 
           <div className="partner-half ph-dp">
+            <div className="partner-watermark" aria-hidden="true">
+              <DigitalParkMark />
+            </div>
             <DigitalParkMark />
             <div className="partner-name">
               Digital<span className="dp-accent">Park</span>
@@ -54,6 +58,22 @@ export default function Partnership({ d }: { d: Dict }) {
                 <li key={it}>{it}</li>
               ))}
             </ul>
+          </div>
+        </div>
+
+        <div className="partner-process rv d2">
+          <div className="partner-process-head">
+            <span className="kick">{p.processEyebrow}</span>
+            <h3>{p.processH}</h3>
+          </div>
+          <div className="partner-process-grid">
+            {p.process.map((s) => (
+              <div className="partner-step" key={s.step}>
+                <span className="partner-step-no">{s.step}</span>
+                <h4>{s.title}</h4>
+                <p>{s.body}</p>
+              </div>
+            ))}
           </div>
         </div>
 

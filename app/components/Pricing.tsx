@@ -1,15 +1,7 @@
 import type { Dict } from "../i18n";
 
-// optional Cal.com (or any booking) link for the featured "Book the studio" tier
+// optional Cal.com (or any booking) link for the "Get a quote" CTA
 const CAL = process.env.NEXT_PUBLIC_CAL_LINK;
-
-function Check() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="#c238cf" strokeWidth="2.5">
-      <path d="M5 12l5 5L20 6" />
-    </svg>
-  );
-}
 
 export default function Pricing({ d }: { d: Dict }) {
   const p = d.pricing;
@@ -22,39 +14,22 @@ export default function Pricing({ d }: { d: Dict }) {
           </h2>
           <p>{p.lead}</p>
         </div>
-        <div className="tiers">
-          {p.tiers.map((t, i) => {
-            const hi = i === 1;
-            return (
-              <article
-                className={`tier ${hi ? "hi" : ""} rv ${i === 1 ? "d1" : i === 2 ? "d2" : ""}`.replace(/\s+/g, " ").trim()}
-                key={t.name}
-              >
-                {t.badge && <div className="badge">{t.badge}</div>}
-                <div className="nm">{t.name}</div>
-                <div className={`pr ${hi ? "grad-t" : ""}`.trim()}>
-                  {t.price}
-                  {t.period && <small> {t.period}</small>}
-                </div>
-                <p className="for">{t.for}</p>
-                <ul>
-                  {t.features.map((f) => (
-                    <li key={f}>
-                      <Check /> {f}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  className={`btn ${hi ? "solid" : "ghost"}`}
-                  href={hi && CAL ? CAL : "#contact"}
-                  {...(hi && CAL ? { target: "_blank", rel: "noreferrer" } : {})}
-                >
-                  <span>{t.cta}</span>
-                  {hi && <span className="ar">↗</span>}
-                </a>
-              </article>
-            );
-          })}
+
+        <div className="price-factors rv d1">
+          {p.factors.map((f, i) => (
+            <div className="price-factor" key={f.title}>
+              <span className="price-factor-no">{String(i + 1).padStart(2, "0")}</span>
+              <h3>{f.title}</h3>
+              <p>{f.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="price-cta rv d2">
+          <a className="btn solid" href={CAL || "#contact"} {...(CAL ? { target: "_blank", rel: "noreferrer" } : {})}>
+            <span>{p.ctaLabel}</span> <span className="ar">↗</span>
+          </a>
+          <p className="price-cta-note">{p.ctaNote}</p>
         </div>
       </div>
     </section>
